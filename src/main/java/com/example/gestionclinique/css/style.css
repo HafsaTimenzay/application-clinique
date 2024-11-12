@@ -1,0 +1,151 @@
+/* Style for the dropdown button */
+.dropdown-button {
+    -fx-background-color: #007bff;       /* Bootstrap blue color */
+    -fx-text-fill: white;
+    -fx-padding: 5px 15px;
+    -fx-background-radius: 4px;          /* Rounded corners */
+    -fx-font-size: 14px;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.dropdown-button:hover {
+    -fx-background-color: #0056b3;       /* Darker blue on hover */
+}
+
+/* Style for the ContextMenu items */
+.context-menu .menu-item {
+    -fx-padding: 5px 15px;
+    -fx-font-size: 14px;
+    -fx-background-color: white;
+    -fx-text-fill: #333333;
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+}
+
+
+.button {
+    -fx-background-color: #FFF;
+    -fx-text-fill: #4d4d4d;
+    -fx-text-alignment: left;
+    -fx-font-size: 20px;         /* Font size */
+    -fx-font-weight: bold;       /* Font weight (bold, normal, etc.) */
+    -fx-font-family: "Google Sans";    /* Font family */
+}
+
+.button:hover {
+    -fx-background-color: #FFF;
+    -fx-text-fill: #fff;
+}
+
+.button:pressed {
+    -fx-background-color: #fb705d8e;
+    -fx-text-fill: #364FCD;
+}
+
+.button:focused {
+    -fx-background-color: #fb705d8e;
+    -fx-text-fill: #364FCD;
+}
+
+.button2 {
+    -fx-background-color: #0C39FF;
+    -fx-border-color: #FFF;
+    -fx-text-fill: #FFF;
+}
+
+.button2:hover {
+    -fx-background-color: #0C3988;
+    -fx-text-fill: #FFF;
+}
+
+.button2:pressed {
+    -fx-background-color: #fb705d8e;
+    -fx-text-fill: #FFF;
+}
+
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-cell-size: 20;
+    -fx-background-color: #2D75E8;
+}
+
+.table-view .column-header .label {
+
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .cell {
+    -fx-cell-size: 30;
+    -fx-alignment: center-left;
+    -fx-text-fill: #000000;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgb(127, 172, 243);
+}
+
+.table-row-cell:selected .text {
+    -fx-fill: white;
+
+}
+
+/* scroll bar starts here */
+
+/* The increment and decrement button CSS class of scrollbar */
+.table-view .increment-button, .table-view .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 2em;
+
+}
+
+/* The main scrollbar **track** CSS class  */
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: derive(#2D75E8, 80%);
+    -fx-background-radius: 2em;
+    -fx-border-radius: 2em;
+}
+
+/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: derive(#2D75E8, 90%);
+    -fx-background-insets: 2, 0, 0;
+    -fx-background-radius: 2em;
+
+}
+
+/* chart properties */
+
+.chart {
+    -fx-padding: 10px;
+    -fx-background-color: transparent;
+    -fx-legend-visible: false;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.chart-pie {
+    -fx-border-color: derive(-fx-pie-color, 1%);
+    -fx-border-width: 0px;
+}
+
+.data0.chart-pie {
+    -fx-pie-color: #364FCD;
+}
+
+.data1.chart-pie {
+    -fx-pie-color: #54AAF3;
+}
+

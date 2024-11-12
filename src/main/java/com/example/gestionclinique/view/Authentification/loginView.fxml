@@ -5,47 +5,42 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="265.0" style="-fx-background-color: #cf341e;">
+      <AnchorPane prefHeight="494.0" prefWidth="358.0" style="-fx-background-color: #cf341e;">
          <children>
-            <ImageView fitHeight="209.0" fitWidth="244.0" layoutX="24.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="244.0" fitWidth="244.0" layoutX="61.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/2.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="156.0" fitWidth="271.0" layoutX="14.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="236.0" fitWidth="337.0" layoutX="14.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../images/Doctors-pana.png" />
                </image>
             </ImageView>
          </children></AnchorPane>
-      <AnchorPane prefHeight="400.0" prefWidth="337.0" style="-fx-background-color: #f1f3f4;">
+      <AnchorPane prefHeight="494.0" prefWidth="433.0" style="-fx-background-color: #f1f3f4;">
          <children>
-            <Button layoutX="26.0" layoutY="266.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="282.0" style="-fx-background-color: #FF725E;" text="Login" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
-            <TextField layoutX="28.0" layoutY="154.0" prefHeight="33.0" prefWidth="282.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
 
-            <Label layoutX="130.0" layoutY="65.0" text="Login">
+            <Label layoutX="178.0" layoutY="81.0" text="Login">
                <font>
                   <Font name="System Bold" size="31.0" />
                </font>
             </Label>
-            <Label layoutX="77.0" layoutY="326.0" text="vous-avez pas de compte ?" />
-            <Label layoutX="225.0" layoutY="325.0" text="Sign-Up " textFill="#ff725e">
+            <TextField layoutX="76.0" layoutY="200.0" prefHeight="33.0" prefWidth="282.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+            <TextField layoutX="76.0" layoutY="254.0" prefHeight="33.0" prefWidth="282.0" promptText="Password" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+            <Button layoutX="74.0" layoutY="323.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="282.0" style="-fx-background-color: #FF725E;" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="140.0" layoutY="385.0" text="vous-avez pas de compte ?" />
+            <Label layoutX="288.0" layoutY="384.0" text="Sign-Up " textFill="#ff725e">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="115.0" layoutY="97.0">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <TextField layoutX="28.0" layoutY="205.0" prefHeight="33.0" prefWidth="282.0" promptText="Password" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
          </children></AnchorPane>
    </children>
 </HBox>
