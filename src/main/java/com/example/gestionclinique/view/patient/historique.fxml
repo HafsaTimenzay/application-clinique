@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
 <?import javafx.geometry.Insets?>
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #fb705d1e;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
@@ -59,5 +61,28 @@
                 </Button>
             </children>
         </VBox>
+      <Pane id="panel" layoutX="331.0" layoutY="114.0" prefHeight="499.0" prefWidth="811.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css">
+         <children>
+            <TableView layoutX="38.0" layoutY="63.0" prefHeight="305.0" prefWidth="705.0">
+              <columns>
+                <TableColumn minWidth="100.0" prefWidth="75.0" text="Date" />
+                <TableColumn minWidth="150.0" prefWidth="75.0" text="Departement" />
+                  <TableColumn minWidth="150.0" prefWidth="75.0" text="Doctor" />
+                  <TableColumn minWidth="150.0" prefWidth="75.0" text="Consultation" />
+                  <TableColumn minWidth="150.0" prefWidth="75.0" text="Prescription" />
+              </columns>
+            </TableView>
+            <Label layoutX="47.0" layoutY="22.0" text="Consultation Table">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Label layoutX="391.0" layoutY="57.0" text="/ Historique">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
