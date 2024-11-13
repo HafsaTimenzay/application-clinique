@@ -1,19 +1,18 @@
-/* Style for the dropdown button */
-.dropdown-button {
-    -fx-background-color: #007bff;       /* Bootstrap blue color */
+/* .dropdown-button {
+    -fx-background-color: #007bff; 
     -fx-text-fill: white;
     -fx-padding: 5px 15px;
-    -fx-background-radius: 4px;          /* Rounded corners */
+    -fx-background-radius: 4px;
     -fx-font-size: 14px;
     -fx-border-color: transparent;
     -fx-cursor: hand;
 }
 
 .dropdown-button:hover {
-    -fx-background-color: #0056b3;       /* Darker blue on hover */
+    -fx-background-color: #0056b3;
 }
 
-/* Style for the ContextMenu items */
+
 .context-menu .menu-item {
     -fx-padding: 5px 15px;
     -fx-font-size: 14px;
@@ -24,45 +23,54 @@
 .context-menu .menu-item:hover {
     -fx-background-color: #007bff;
     -fx-text-fill: white;
-}
+} */
 
-
-.button {
-    -fx-background-color: #FFF;
-    -fx-text-fill: #4d4d4d;
+.buttonNav {
+    -fx-background-color: #cf341e;
+    -fx-text-fill: #fff;
     -fx-text-alignment: left;
-    -fx-font-size: 20px;         /* Font size */
-    -fx-font-weight: bold;       /* Font weight (bold, normal, etc.) */
-    -fx-font-family: "Google Sans";    /* Font family */
+    -fx-font-size: 16px;
+    -fx-font-family: "montserat"; 
 }
 
-.button:hover {
-    -fx-background-color: #FFF;
+.buttonNav:hover {
+    -fx-background-color: #fb705d8e;
     -fx-text-fill: #fff;
 }
 
-.button:pressed {
+.buttonNav:pressed {
     -fx-background-color: #fb705d8e;
-    -fx-text-fill: #364FCD;
+    -fx-text-fill: #fff;
 }
 
-.button:focused {
+.buttonNav:focused {
     -fx-background-color: #fb705d8e;
-    -fx-text-fill: #364FCD;
+    -fx-text-fill: #ffffff;
 }
 
-.button2 {
-    -fx-background-color: #0C39FF;
+/* .logout{
+    -fx-background-color: #fb705d8e;
+    position: relative;
+    top: 0;
+    margin-top: 100px;
+    -fx-text-fill: #fff;
+    -fx-font-size: 16px;
+    -fx-font-family: "montserat"; 
+
+} */
+
+.Btn {
+    -fx-background-color: #ff725e;
     -fx-border-color: #FFF;
     -fx-text-fill: #FFF;
 }
 
-.button2:hover {
-    -fx-background-color: #0C3988;
+.Btn:hover {
+    -fx-background-color: #cf341e;
     -fx-text-fill: #FFF;
 }
 
-.button2:pressed {
+.Btn:pressed {
     -fx-background-color: #fb705d8e;
     -fx-text-fill: #FFF;
 }
@@ -71,7 +79,7 @@
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-cell-size: 20;
-    -fx-background-color: #2D75E8;
+    -fx-background-color: #ff725e;
 }
 
 .table-view .column-header .label {
@@ -97,16 +105,13 @@
 
 }
 
-/* scroll bar starts here */
 
-/* The increment and decrement button CSS class of scrollbar */
 .table-view .increment-button, .table-view .decrement-button {
     -fx-background-color: transparent;
     -fx-background-radius: 2em;
 
 }
 
-/* The main scrollbar **track** CSS class  */
 .table-view .scroll-bar:horizontal .track,
 .table-view .scroll-bar:vertical .track {
     -fx-background-color: transparent;
@@ -115,7 +120,6 @@
     -fx-border-radius: 2em;
 }
 
-/* The main scrollbar **thumb** CSS class which we drag every time (movable) */
 .table-view .scroll-bar:horizontal .thumb,
 .table-view .scroll-bar:vertical .thumb {
     -fx-background-color: derive(#2D75E8, 90%);
@@ -124,7 +128,6 @@
 
 }
 
-/* chart properties */
 
 .chart {
     -fx-padding: 10px;
