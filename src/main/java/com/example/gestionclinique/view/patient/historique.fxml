@@ -35,15 +35,15 @@
                 </VBox>
             </children>
         </VBox>
-      <Pane id="panel" layoutX="331.0" layoutY="114.0" prefHeight="499.0" prefWidth="811.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css">
+      <Pane id="panel" layoutX="315.0" layoutY="109.0" prefHeight="502.0" prefWidth="843.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css">
          <children>
-            <TableView layoutX="38.0" layoutY="63.0" prefHeight="305.0" prefWidth="705.0">
+            <TableView layoutX="52.0" layoutY="64.0" prefHeight="305.0" prefWidth="734.0">
               <columns>
                 <TableColumn minWidth="100.0" prefWidth="75.0" text="Date" />
                 <TableColumn minWidth="150.0" prefWidth="75.0" text="Departement" />
                   <TableColumn minWidth="150.0" prefWidth="75.0" text="Doctor" />
                   <TableColumn minWidth="150.0" prefWidth="75.0" text="Consultation" />
-                  <TableColumn minWidth="150.0" prefWidth="75.0" text="Prescription" />
+                  <TableColumn minWidth="150.0" prefWidth="182.6666259765625" text="Prescription" />
               </columns>
             </TableView>
             <Label layoutX="47.0" layoutY="22.0" text="Consultation Table">
@@ -53,9 +53,9 @@
             </Label>
          </children>
       </Pane>
-      <Label layoutX="391.0" layoutY="57.0" text="/ Historique">
+      <Label layoutX="324.0" layoutY="41.0" style="-fx-font-weight: bold;" text="/ Historique" textFill="#6e6463">
          <font>
-            <Font size="17.0" />
+            <Font size="27.0" />
          </font>
       </Label>
     </children>

@@ -71,7 +71,7 @@
 }
 
 .Btn:pressed {
-    -fx-background-color: #fb705d8e;
+    -fx-background-color: #cf341e;
     -fx-text-fill: #FFF;
 }
 
@@ -79,14 +79,24 @@
 .table-view .column-header,
 .table-view .column-header-background .filler {
     -fx-cell-size: 20;
-    -fx-background-color: #ff725e;
+    -fx-background-color: #626262;
 }
 
 .table-view .column-header .label {
 
     -fx-text-fill: white;
+    -fx-padding: 10px;
     -fx-font-weight: bold;
     -fx-alignment: CENTER_LEFT;
+}
+
+.title{
+    -fx-background-color: #cf341e;
+    -fx-text-fill: #fff;
+    -fx-text-alignment: left;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family: "montserat"; 
 }
 
 .table-view .cell {
