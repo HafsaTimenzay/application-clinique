@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1285.0" style="-fx-background-color: #ededed;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <fx:include source="MainMedecin.fxml" />
+        <Pane id="panel" layoutX="321.0" layoutY="101.0" prefHeight="518.0" prefWidth="927.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css" />
+        <Label layoutX="324.0" layoutY="35.0" style="-fx-font-weight: bold;" text="/ Dashboard" textFill="#6e6463">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Label>
+        <TableView layoutX="378.0" layoutY="203.0" prefHeight="294.0" prefWidth="831.0">
+            <columns>
+                <TableColumn minWidth="100.0" prefWidth="75.0" text="Date" />
+                <TableColumn minWidth="150.0" prefWidth="75.0" text="Time" />
+                <TableColumn minWidth="150.0" prefWidth="75.0" text="Patient" />
+                <TableColumn minWidth="150.0" prefWidth="191.3333740234375" text="Cause" />
+                <TableColumn minWidth="130.66656494140625" prefWidth="130.66656494140625" text="Statut" />
+                <TableColumn minWidth="141.333251953125" prefWidth="225.33349609375" text="Consultation" />
+            </columns>
+        </TableView>
+        <Label layoutX="388.0" layoutY="150.0" style="-fx-font-weight: bold;" text="Histrorique">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Label>
+        <Button layoutX="1056.0" layoutY="137.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="139.0" styleClass="Btn" stylesheets="@../../css/style.css" text="Add Rendez-Vous" />
+    </children>
+</AnchorPane>

@@ -11,49 +11,50 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1288.0" style="-fx-background-color: #fb705d1e;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <fx:include source="MainPatient.fxml" />
-      <Label layoutX="374.0" layoutY="124.0" text="Select Depatment">
+      <Label layoutX="374.0" layoutY="178.0" text="Select Depatment">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <ComboBox layoutX="370.0" layoutY="162.0" prefHeight="38.0" prefWidth="293.0" promptText="Cardiology Departement" />
-      <Label layoutX="752.0" layoutY="125.0" text="Avariables Doctrors">
+      <ComboBox layoutX="370.0" layoutY="216.0" prefHeight="38.0" prefWidth="350.0" promptText="Cardiology Departement" />
+      <Label layoutX="792.0" layoutY="179.0" text="Avariables Doctrors">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <ComboBox layoutX="745.0" layoutY="161.0" prefHeight="38.0" prefWidth="301.0" promptText="Dr.Hassan Sakine" />
-      <Label layoutX="381.0" layoutY="222.0" text="Appointement For">
+      <ComboBox layoutX="786.0" layoutY="215.0" prefHeight="38.0" prefWidth="350.0" promptText="Dr.Hassan Sakine" />
+      <Label layoutX="378.0" layoutY="278.0" text="Appointement For">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TextField layoutX="374.0" layoutY="265.0" prefHeight="42.0" prefWidth="664.0" />
-      <Label layoutX="385.0" layoutY="331.0" text="Select date">
+      <TextField layoutX="374.0" layoutY="322.0" prefHeight="40.0" prefWidth="759.0" />
+      <Label layoutX="385.0" layoutY="385.0" text="Select date">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <ToggleButton layoutX="598.0" layoutY="370.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Wednesday" />
-      <ToggleButton layoutX="373.0" layoutY="422.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Thursday" />
-      <ToggleButton layoutX="598.0" layoutY="421.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Saturday" />
-      <ToggleButton layoutX="486.0" layoutY="421.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Friday" />
-      <ToggleButton layoutX="486.0" layoutY="370.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Tuesday" />
-      <ToggleButton layoutX="373.0" layoutY="369.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Monday" />
-      <Label layoutX="746.0" layoutY="332.0" text="Select ">
+      <ToggleButton layoutX="650.0" layoutY="423.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Wednesday" />
+      <ToggleButton layoutX="373.0" layoutY="476.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Thursday" />
+      <ToggleButton layoutX="619.0" layoutY="474.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Saturday" />
+      <ToggleButton layoutX="496.0" layoutY="476.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Friday" />
+      <ToggleButton layoutX="525.0" layoutY="423.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Tuesday" />
+      <ToggleButton layoutX="395.3333333333333" layoutY="423.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Monday" AnchorPane.leftAnchor="395.3333333333333" AnchorPane.topAnchor="423.0" />
+      <Label layoutX="806.0" layoutY="386.0" text="Select  Time ">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <ToggleButton layoutX="756.0" layoutY="370.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="09:00 am" />
-      <ToggleButton layoutX="757.0" layoutY="422.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="01:00 pm" />
-      <ToggleButton layoutX="858.0" layoutY="423.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="02:00 pm" />
-      <ToggleButton layoutX="960.0" layoutY="370.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="11:00 am" />
-      <ToggleButton layoutX="858.0" layoutY="370.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="10:00 am" />
-      <ToggleButton layoutX="960.0" layoutY="425.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="03:00 pm" />
-      <ToggleButton layoutX="758.0" layoutY="474.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="04:00 pm" />
-      <ToggleButton layoutX="858.0" layoutY="475.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="05:00 pm" />
-      <ToggleButton layoutX="960.0" layoutY="477.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="06:00 pm" />
-      <ToggleButton layoutX="960.0" layoutY="548.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="116.0" text="Send" />
+      <ToggleButton layoutX="803.0" layoutY="427.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="09:00 am" />
+      <ToggleButton layoutX="1115.0" layoutY="426.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="12:00 pm" />
+      <ToggleButton layoutX="1009.0" layoutY="427.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="11:00 am" />
+      <ToggleButton layoutX="804.0" layoutY="479.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="01:00 pm" />
+      <ToggleButton layoutX="1116.0" layoutY="477.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="04:00 pm" />
+      <ToggleButton layoutX="1010.0" layoutY="478.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="03:00 pm" />
+      <ToggleButton layoutX="905.0" layoutY="427.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="10:00 am" />
+      <ToggleButton layoutX="905.0" layoutY="479.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="02:00 pm" />
+
+      <Button layoutX="1062.0" layoutY="554.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="130.0" styleClass="Btn" stylesheets="@../../css/style.css" text="Send" />
+      
    </children>
 </AnchorPane>

@@ -1,73 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #fb705d1e;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1287.0" style="-fx-background-color: #fb705d1e;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <fx:include source="MainPatient.fxml"/>
-      <Pane id="panel" layoutX="341.0" layoutY="124.0" prefHeight="499.0" prefWidth="811.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css">
-         <children>
-            <Label layoutX="52.0" layoutY="105.0" text="First name">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="318.0" layoutY="107.0" text="Last name">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="565.0" layoutY="105.0" text="Date of Birth">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <TextField layoutX="45.0" layoutY="149.0" prefHeight="44.0" prefWidth="191.0" />
-            <TextField layoutX="316.0" layoutY="147.0" prefHeight="44.0" prefWidth="191.0" />
-            <ComboBox layoutX="37.0" layoutY="27.0" prefHeight="40.0" prefWidth="177.0" promptText="Mme" />
-            <DatePicker layoutX="560.0" layoutY="143.0" prefHeight="42.0" prefWidth="206.0" />
-            <Label layoutX="51.0" layoutY="218.0" text="Email">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="471.0" layoutY="223.0" text="GSM">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <TextField layoutX="43.0" layoutY="262.0" prefHeight="44.0" prefWidth="354.0" />
-            <TextField layoutX="469.0" layoutY="263.0" prefHeight="44.0" prefWidth="302.0" />
-            <Label layoutX="44.0" layoutY="320.0" text="Poids">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="465.0" layoutY="325.0" text="Taille">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <TextField layoutX="44.0" layoutY="362.0" prefHeight="44.0" prefWidth="354.0" />
-            <TextField layoutX="463.0" layoutY="365.0" prefHeight="44.0" prefWidth="302.0" />
-            <Button layoutX="668.0" layoutY="434.0" mnemonicParsing="false" text="Save" />
-         </children>
-      </Pane>
-      <Label layoutX="401.0" layoutY="67.0" text="/ Profiel">
+        <fx:include source="MainPatient.fxml" />
+      <Label layoutX="382.0" layoutY="226.0" text="First name">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+      <Label layoutX="650.0" layoutY="225.0" text="Last name">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="915.0" layoutY="224.0" text="Date of Birth">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField layoutX="372.0" layoutY="262.0" prefHeight="40.0" prefWidth="225.0" />
+      <TextField layoutX="643.0" layoutY="260.0" prefHeight="44.0" prefWidth="225.0" />
+      <ComboBox layoutX="368.0" layoutY="159.0" prefHeight="44.0" prefWidth="157.0" promptText="Mme" />
+      <DatePicker layoutX="915.0" layoutY="262.0" prefHeight="42.0" prefWidth="225.0" />
+      <Label layoutX="386.0" layoutY="325.0" text="Email">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="789.0" layoutY="326.0" text="GSM">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField layoutX="376.0" layoutY="358.0" prefHeight="40.0" prefWidth="350.0" />
+      <TextField layoutX="778.0" layoutY="356.0" prefHeight="40.0" prefWidth="350.0" />
+      <Label layoutX="391.0" layoutY="423.0" text="Poids">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="572.0" layoutY="424.0" text="Taille">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TextField layoutX="388.0" layoutY="459.0" prefHeight="40.0" prefWidth="130.0" />
+      <TextField layoutX="565.0" layoutY="457.0" prefHeight="40.0" prefWidth="130.0" />
+      <Button layoutX="1072.0" layoutY="542.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="103.0" styleClass="Btn" text="Save" />
     </children>
 </AnchorPane>
