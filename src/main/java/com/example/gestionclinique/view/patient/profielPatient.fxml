@@ -15,53 +15,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #fb705d1e;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox prefHeight="649.0" prefWidth="277.0" style="-fx-background-color: #fff;">
-            <children>
-                <ImageView fitHeight="215.0" fitWidth="215.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../../images/1.png" />
-                    </image>
-                    <VBox.margin>
-                        <Insets left="30.0" />
-                    </VBox.margin>
-                </ImageView>
-                <Button graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Dashboard">
-                    <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/house-solid.png" />
-                            </image>
-                        </ImageView>
-                    </graphic></Button>
-                <Button graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Rendez-vous">
-                    <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/calendar-days-solid.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Historique">
-                    <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/clock-rotate-left-solid.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <Button graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Profiel">
-                    <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/user-solid.png" />
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-            </children>
-        </VBox>
+        <fx:include source="MainPatient.fxml"/>
       <Pane id="panel" layoutX="341.0" layoutY="124.0" prefHeight="499.0" prefWidth="811.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css">
          <children>
             <Label layoutX="52.0" layoutY="105.0" text="First name">

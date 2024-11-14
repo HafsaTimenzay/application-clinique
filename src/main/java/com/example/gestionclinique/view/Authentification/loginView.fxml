@@ -40,7 +40,7 @@
                </font>
             </Button>
             <Label layoutX="140.0" layoutY="385.0" text="vous-avez pas de compte ?" />
-            <Label layoutX="288.0" layoutY="384.0" text="Sign-Up " textFill="#ff725e">
+            <Label layoutX="288.0" layoutY="384.0" text="Sign-Up" textFill="#ff725e" >
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
