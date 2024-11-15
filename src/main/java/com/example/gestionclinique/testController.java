@@ -2,52 +2,73 @@ package com.example.gestionclinique;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.Parent;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
 public class testController {
 
     @FXML
-    private BorderPane root; // Ensure this matches the fx:id in the FXML
+    private Pane contentPane;
+
+    @FXML
+    private Label pageTitle;
 
     /**
-     * Loads an FXML file into the center of the BorderPane.
+     * Load the Dashboard view into the contentPane.
+     */
+    @FXML
+    private void loadDashboard() {
+        loadPage("historique-patient.fxml", "/ Dashboard");
+    }
+
+    /**
+     * Load the Appointments view into the contentPane.
+     */
+    @FXML
+    private void loadAppointments() {
+        loadPage("rendezvous-patient.fxml", "/ Rendez-vous");
+    }
+
+    /**
+     * Load the Profile view into the contentPane.
+     */
+    @FXML
+    private void loadProfilePage() {
+        loadPage("profil-patient.fxml", "/ Profiel");
+    }
+
+    /**
+     * Logout logic.
+     */
+    @FXML
+    private void logout() {
+        // Implement your logout logic here
+        System.out.println("Logout clicked");
+    }
+
+    /**
+     * Loads an FXML page into the contentPane and updates the page title.
      *
      * @param fxmlFile the FXML file to load
+     * @param title    the title to display
      */
-    private void loadPage(String fxmlFile) {
+    private void loadPage(String fxmlFile, String title) {
         try {
-            Parent page = FXMLLoader.load(getClass().getResource("/" + fxmlFile));
-            root.setCenter(page); // Ensure root is properly initialized
+            // Ensure the path is relative to the resource folder
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/" + fxmlFile));
+            Node page = loader.load();
+
+            // Clear the existing content and load the new page
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(page);
+
+            // Update the page title
+            pageTitle.setText(title);
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void loadDashboard() {
-        loadPage("com/example/gestionclinique/view/patient/main-patient.fxml");
-    }
-
-    @FXML
-    private void loadHistorique() {
-        loadPage("com/example/gestionclinique/view/patient/historique-patient.fxml");
-    }
-
-    @FXML
-    private void loadProfil() {
-        loadPage("com/example/gestionclinique/view/patient/profil-patient.fxml");
-    }
-
-    @FXML
-    private void loadRendezVous() {
-        loadPage("com/example/gestionclinique/view/patient/rendezvous-patient.fxml");
-    }
-
-    @FXML
-    private void loadTest() {
-        loadPage("com/example/gestionclinique/test.fxml");
     }
 }
