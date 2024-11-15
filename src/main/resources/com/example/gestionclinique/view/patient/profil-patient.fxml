@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1287.0" style="-fx-background-color: #fb705d1e;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <fx:include source="MainPatient.fxml" />
+        <fx:include source="main-patient.fxml" />
       <Label layoutX="382.0" layoutY="226.0" text="First name">
          <font>
             <Font size="17.0" />

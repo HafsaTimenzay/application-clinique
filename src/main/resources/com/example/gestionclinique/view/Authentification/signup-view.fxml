@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.example.gestionclinique.controller.AuthController">
 <children>
     <AnchorPane prefHeight="494.0" prefWidth="358.0" style="-fx-background-color: #cf341e;">
         <children>
@@ -31,7 +31,7 @@
                     <Font name="System Bold" size="14.0" />
                 </font>
             </Button>
-            <TextField layoutX="71.0" layoutY="152.0" prefHeight="33.0" prefWidth="137.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+            <TextField  layoutX="71.0" layoutY="152.0" prefHeight="33.0" prefWidth="137.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
 
             <Label layoutX="155.0" layoutY="31.0" text="Sing Up">
                 <font>

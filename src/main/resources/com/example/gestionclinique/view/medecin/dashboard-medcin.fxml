@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1285.0" style="-fx-background-color: #ededed;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <fx:include source="MainMedecin.fxml" />
+        <fx:include source="main-medecin.fxml" />
         <Pane id="panel" layoutX="321.0" layoutY="101.0" prefHeight="518.0" prefWidth="927.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css" />
         <Label layoutX="324.0" layoutY="35.0" style="-fx-font-weight: bold;" text="/ Dashboard" textFill="#6e6463">
             <font>

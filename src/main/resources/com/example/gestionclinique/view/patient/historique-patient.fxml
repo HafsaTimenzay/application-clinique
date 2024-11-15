@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1285.0" style="-fx-background-color: #ededed;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <fx:include source="MainPatient.fxml" />
+        <fx:include source="main-patient.fxml" />
       <TableView layoutX="368.0" layoutY="193.0" prefHeight="294.0" prefWidth="831.0">
          <columns>
             <TableColumn minWidth="100.0" prefWidth="75.0" text="Date" />

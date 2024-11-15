@@ -14,7 +14,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1288.0" style="-fx-background-color: #fb705d1e;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <fx:include source="MainMedecin.fxml" />
+        <fx:include source="main-medecin.fxml" />
         <?xml version="1.0" encoding="UTF-8"?>
 
 
