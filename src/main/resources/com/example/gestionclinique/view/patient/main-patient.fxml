@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1285.0" style="-fx-background-color: #ededed;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1285.0" style="-fx-background-color: #ededed;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionclinique.controller.PatientController">
     <children>
         <VBox prefHeight="649.0" prefWidth="277.0" style="-fx-background-color: #fff;">
             <children>
@@ -24,10 +24,10 @@
                                 <Insets left="30.0" />
                             </VBox.margin>
                         </ImageView>
-                        <Button styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Dashboard" />
-                        <Button styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Rendez-vous" />
-                        <Button styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Profiel" />
-                        <Button styleClass="buttonNav" graphicTextGap="20.0" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Logout" />
+                        <Button fx:id="dashboardButton" styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Dashboard" />
+                        <Button fx:id="appointmentsButton" styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Rendez-vous" />
+                        <Button fx:id="profileButton" styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Profiel" />
+                        <Button fx:id="logoutButton" styleClass="buttonNav" graphicTextGap="20.0" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Logout" />
                     </children>
                 </VBox>
             </children>

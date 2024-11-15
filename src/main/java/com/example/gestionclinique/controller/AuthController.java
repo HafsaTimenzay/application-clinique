@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;  // Import Node class
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 
 public class AuthController {
 
@@ -31,7 +30,7 @@ public class AuthController {
             // Set the new scene (signup page)
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
-            currentStage.setTitle("Sign-Up");
+            currentStage.setTitle("Gestion Clinique Medical");
             currentStage.show();
         } catch (Exception e) {
             e.printStackTrace();
