@@ -1,51 +1,69 @@
 package com.example.gestionclinique.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
-
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 import java.io.IOException;
 
 public class PatientController {
 
     @FXML
-    private Button dashboardButton;
+    private Pane contentPane;  // The Pane where dynamic content will be loaded
 
     @FXML
-    private Button appointmentsButton;
+    private Button dashboardButton, appointmentsButton, profileButton, logoutButton;
 
-    @FXML
-    private Button profileButton;
-
-    @FXML
-    private Button logoutButton;
-
-    @FXML
-    private Pane contentPane;
-
-    @FXML
-    public void initialize() {
-        // Attach event handlers to buttons
-        dashboardButton.setOnAction(event -> loadView("/com/example/gestionclinique/view/patient/historique-patient.fxml"));
-        appointmentsButton.setOnAction(event -> loadView("/com/example/gestionclinique/view/patient/rendezvous-patient.fxml"));
-        profileButton.setOnAction(event -> loadView("/com/example/gestionclinique/view/patient/profil-patient.fxml"));
-        logoutButton.setOnAction(event -> logout());
+    // Function to load a specific panel into contentPane
+    private void loadPanel(String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Pane pane = loader.load();  // Load the panel dynamically
+        contentPane.getChildren().setAll(pane);  // Replace the current content with the new panel
     }
 
-    private void loadView(String fxmlFile) {
+    // Event handler for the Dashboard button
+    @FXML
+    private void loadDashboard(ActionEvent event) {
         try {
-            // Load the new FXML file
-            Pane newPane = FXMLLoader.load(getClass().getResource(fxmlFile));
-            // Replace the content of contentPane
-            contentPane.getChildren().setAll(newPane);
+            loadPanel("/com/example/gestionclinique/view/patient/historique-patient.fxml");  // Replace with the actual path to your dashboard FXML
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void logout() {
-        // Implement logout logic (e.g., redirect to login page)
-        System.out.println("Logging out...");
+    // Event handler for the Appointments button
+    @FXML
+    private void loadAppointments(ActionEvent event) {
+        try {
+            loadPanel("/com/example/gestionclinique/view/patient/rendezvous-patient.fxml");  // Replace with the actual path to your appointments FXML
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+    // Event handler for the Profile button
+    @FXML
+    public void loadProfilePage() {
+        try {
+            loadPanel("/com/example/gestionclinique/view/patient/profil-patient.fxml");  // Path to profile FXML
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    // Event handler for the Logout button
+    @FXML
+    private void logout(ActionEvent event) {
+        System.out.println("login out ...");
+    }
+
+
+    // Function to load the Profile page initially
+
+    // Function to load a specific panel into contentPane
+
 }

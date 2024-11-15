@@ -1,42 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1285.0" style="-fx-background-color: #ededed;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionclinique.controller.PatientController">
-    <children>
-        <VBox prefHeight="649.0" prefWidth="277.0" style="-fx-background-color: #fff;">
-            <children>
-                <VBox prefHeight="649.0" prefWidth="277.0" style="-fx-background-color: #cf341e;">
-                    <children>
-                        <ImageView fitHeight="215.0" fitWidth="215.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../images/2.png" />
-                            </image>
-                            <VBox.margin>
-                                <Insets left="30.0" />
-                            </VBox.margin>
-                        </ImageView>
-                        <Button fx:id="dashboardButton" styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Dashboard" />
-                        <Button fx:id="appointmentsButton" styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Rendez-vous" />
-                        <Button fx:id="profileButton" styleClass="buttonNav" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Profiel" />
-                        <Button fx:id="logoutButton" styleClass="buttonNav" graphicTextGap="20.0" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" stylesheets="@../../css/style.css" text="Logout" />
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
-        <Pane id="panel" layoutX="321.0" layoutY="101.0" prefHeight="518.0" prefWidth="927.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css" />
-        <Label layoutX="324.0" layoutY="35.0" style="-fx-font-weight: bold;" text="/ Dashboard" textFill="#6e6463">
-            <font>
-                <Font size="27.0" />
-            </font>
-        </Label>
-    </children>
-</AnchorPane>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.gestionclinique.testController">
+
+    <!-- Navbar at the top -->
+    <top>
+        <HBox style="-fx-background-color: #2c3e50; -fx-padding: 10px;" spacing="10">
+            <Button text="Dashboard" onAction="#loadDashboard" style="-fx-text-fill: white; -fx-background-color: transparent;" />
+            <Button text="Appointment" onAction="#loadRendezVous" style="-fx-text-fill: white; -fx-background-color: transparent;" />
+            <Button text="Profile" onAction="#loadProfil" style="-fx-text-fill: white; -fx-background-color: transparent;" />
+            <Button text="Logout" onAction="#loadTest" style="-fx-text-fill: white; -fx-background-color: transparent;" />
+        </HBox>
+    </top>
+
+    <!-- Default content area -->
+    <center>
+        <!-- Content will be dynamically loaded here -->
+    </center>
+</BorderPane>
