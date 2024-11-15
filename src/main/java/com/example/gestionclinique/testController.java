@@ -10,7 +10,7 @@ import java.io.IOException;
 public class testController {
 
     @FXML
-    private BorderPane root;
+    private BorderPane root; // Ensure this matches the fx:id in the FXML
 
     /**
      * Loads an FXML file into the center of the BorderPane.
@@ -20,7 +20,7 @@ public class testController {
     private void loadPage(String fxmlFile) {
         try {
             Parent page = FXMLLoader.load(getClass().getResource("/" + fxmlFile));
-            root.setCenter(page);
+            root.setCenter(page); // Ensure root is properly initialized
         } catch (IOException e) {
             e.printStackTrace();
         }
