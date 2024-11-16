@@ -11,32 +11,12 @@ import javafx.stage.Stage;
 import javafx.scene.Node;  // Import Node class
 import javafx.event.ActionEvent;
 
-public class AuthController {
+public class AuthController extends PatientController{
 
     @FXML
     private TextField usernameField;  // Email field
     @FXML
     private PasswordField passwordField;  // Password field
-    @FXML
-    private void handleSignupClick(ActionEvent event) {
-        try {
-            // Load the signup FXML file
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/Authentification/signup-view.fxml"));
-            Parent root = loader.load();
-
-            // Get the current stage (the login stage)
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Set the new scene (signup page)
-            Scene scene = new Scene(root);
-            currentStage.setScene(scene);
-            currentStage.setTitle("Gestion Clinique Medical");
-            currentStage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
 
     // Function to validate the email and password
     public boolean validateCredentials() {
@@ -55,13 +35,11 @@ public class AuthController {
             return false;
         }
 
-        if(!password.equals("p") || !email.equals("e@e.e")){
-
-            showAlert("User not Found","password or email not crorrect "+!password.equals("p")+ !email.equals("e"));
+        // Check for valid hardcoded credentials (as you have in your code)
+        if (!password.equals("p") || !email.equals("e@e.e")) {
+            showAlert("User not Found", "Password or email is incorrect");
             return false;
         }
-
-        // You can add more complex checks here (like regex for email format, password strength, etc.)
 
         return true;  // Email and password are valid
     }
@@ -79,18 +57,50 @@ public class AuthController {
     @FXML
     private void handleLoginClick(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/profil-patient.fxml"));
+            if (validateCredentials()) {
+                // Load the main view (includes sidebar and contentPane)
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
+                Parent root = loader.load();
+
+                // Get the controller of the main view
+                PatientController patientController = loader.getController();
+
+                // Call the loadProfilePage() method to display the profile page
+                patientController.loadProfilePage();
+
+                // Switch to the main view scene
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                Scene scene = new Scene(root);
+                currentStage.setScene(scene);
+                currentStage.setMaximized(true);
+                currentStage.setTitle("Gestion Clinique - Dashboard");
+                currentStage.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    // Signup button handler
+    @FXML
+    private void handleSignupClick(ActionEvent event) {
+        try {
+            // Load the signup FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/Authentification/signup-view.fxml"));
             Parent root = loader.load();
+
+            // Get the current stage (the login stage)
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene (signup page)
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
-            currentStage.setMaximized(true);
             currentStage.setTitle("Sign-Up");
             currentStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }
-

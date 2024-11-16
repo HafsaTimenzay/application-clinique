@@ -1,69 +1,77 @@
 package com.example.gestionclinique.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.Pane;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.text.Font;
+import javafx.scene.layout.Pane;
+
 import java.io.IOException;
 
 public class PatientController {
 
     @FXML
-    private Pane contentPane;  // The Pane where dynamic content will be loaded
+    private Pane contentPane;
 
     @FXML
-    private Button dashboardButton, appointmentsButton, profileButton, logoutButton;
+    private Label pageTitle;
 
-    // Function to load a specific panel into contentPane
-    private void loadPanel(String fxmlFile) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Pane pane = loader.load();  // Load the panel dynamically
-        contentPane.getChildren().setAll(pane);  // Replace the current content with the new panel
+    /**
+     * Load the Dashboard view into the contentPane.
+     */
+    @FXML
+    private void loadDashboard() {
+        loadPage("historique-patient.fxml", "/ Dashboard");
     }
 
-    // Event handler for the Dashboard button
+    /**
+     * Load the Appointments view into the contentPane.
+     */
     @FXML
-    private void loadDashboard(ActionEvent event) {
+    private void loadAppointments() {
+        loadPage("rendezvous-patient.fxml", "/ Rendez-vous");
+    }
+
+    /**
+     * Load the Profile view into the contentPane.
+     */
+    @FXML
+    protected void loadProfilePage() {
+        loadPage("profil-patient.fxml", "/ Profiel");
+    }
+
+
+    /**
+     * Logout logic.
+     */
+    @FXML
+    private void logout() {
+        // Implement your logout logic here
+        System.out.println("Logout clicked");
+    }
+
+    /**
+     * Loads an FXML page into the contentPane and updates the page title.
+     *
+     * @param fxmlFile the FXML file to load
+     * @param title    the title to display
+     */
+    private void loadPage(String fxmlFile, String title) {
         try {
-            loadPanel("/com/example/gestionclinique/view/patient/historique-patient.fxml");  // Replace with the actual path to your dashboard FXML
+            // Ensure the path is relative to the resource folder
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/" + fxmlFile));
+            Node page = loader.load();
+
+            // Clear the existing content and load the new page
+            contentPane.getChildren().clear();
+            contentPane.getChildren().add(page);
+
+            // Update the page title
+            pageTitle.setText(title);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Event handler for the Appointments button
-    @FXML
-    private void loadAppointments(ActionEvent event) {
-        try {
-            loadPanel("/com/example/gestionclinique/view/patient/rendezvous-patient.fxml");  // Replace with the actual path to your appointments FXML
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Event handler for the Profile button
-    @FXML
-    public void loadProfilePage() {
-        try {
-            loadPanel("/com/example/gestionclinique/view/patient/profil-patient.fxml");  // Path to profile FXML
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    // Event handler for the Logout button
-    @FXML
-    private void logout(ActionEvent event) {
-        System.out.println("login out ...");
-    }
-
-
-    // Function to load the Profile page initially
-
-    // Function to load a specific panel into contentPane
 
 }
