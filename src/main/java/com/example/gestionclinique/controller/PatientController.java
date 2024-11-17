@@ -29,7 +29,7 @@ public class PatientController {
      */
     @FXML
     private void loadAppointments() {
-        loadPage("rendezvous-patient.fxml", "/ Rendez-vous");
+        loadPage("rendezvous-patient.fxml", "/ Appointment");
     }
 
     /**
@@ -72,6 +72,5 @@ public class PatientController {
             e.printStackTrace();
         }
     }
-
 
 }

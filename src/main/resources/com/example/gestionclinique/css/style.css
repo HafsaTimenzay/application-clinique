@@ -145,27 +145,35 @@
 
 }
 
-
-.chart {
-    -fx-padding: 10px;
-    -fx-background-color: transparent;
-    -fx-legend-visible: false;
+/* General styling for all CheckBoxes */
+.check-box {
+    -fx-font-size: 13px;              /* Text size */
+    -fx-text-fill: #333333;           /* Text color */
+    -fx-padding: 5;                   /* Padding around the checkbox */
 }
 
-.chart-plot-background {
-    -fx-background-color: transparent;
+/* Style for the box (before it's checked) */
+.check-box .box {
+    -fx-border-color: #666666;        /* Border color */
+    -fx-border-width: 2;              /* Border thickness */
+    -fx-border-radius: 3;             /* Rounded corners */
+    -fx-background-color: #ffffff;    /* Background color */
+    -fx-background-radius: 3;         /* Rounded background corners */
 }
 
-.chart-pie {
-    -fx-border-color: derive(-fx-pie-color, 1%);
-    -fx-border-width: 0px;
+
+.check-box:selected .box {
+    -fx-background-color: #fb705d;    /* Background color when checked */
+    -fx-border-color: #fb705d;        /* Border color when checked */
 }
 
-.data0.chart-pie {
-    -fx-pie-color: #364FCD;
+/* Style for the tick mark when checked */
+.check-box:selected .box .mark {
+    -fx-background-color: white;      /* Tick color */
+    -fx-stroke-width: 2;              /* Thickness of the tick mark */
 }
 
-.data1.chart-pie {
-    -fx-pie-color: #54AAF3;
+/* Disabled CheckBox styling */
+.check-box:disabled {
+    -fx-opacity: 0.6;                 /* Transparency for disabled state */
 }
-
