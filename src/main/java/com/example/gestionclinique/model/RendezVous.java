@@ -11,6 +11,7 @@ public class RendezVous {
     private Date dateRendezVous;
     private Time horaire;
 
+
     public RendezVous(int id, String type, long medecinId, int patientId, Date dateRendezVous, Time horaire) {
         this.id = id;
         this.type = type;
