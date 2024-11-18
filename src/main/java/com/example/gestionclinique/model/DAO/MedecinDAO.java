@@ -1,9 +1,10 @@
-package com.example.gestionclinique.model.database.DAO;
+package com.example.gestionclinique.model.DAO;
 
 import com.example.gestionclinique.model.Medecin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class MedecinDAO {

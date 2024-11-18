@@ -1,8 +1,10 @@
-package com.example.gestionclinique.model.database.DAO;
+package com.example.gestionclinique.model.DAO;
 
 import com.example.gestionclinique.model.Consultation;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class ConsultationDAO {
 

@@ -12,7 +12,6 @@ public class Medecin {
     private int specialiteId;
     private long compteId;
 
-    // Constructeurs, getters et setters
 
     public Medecin(long idMedecin, String nom, String prenom, String adresse, Date dateNaissance, int specialiteId, long compteId) {
         this.idMedecin = idMedecin;

@@ -11,12 +11,7 @@ public class Disponibilite {
 
     // Constructeurs, getters et setters
 
-    public Disponibilite(int idDisponibilite, long medecinId, String jour, Time hourDebut, Time hourFin) {
-        this.idDisponibilite = idDisponibilite;
-        this.medecinId = medecinId;
-        this.jour = jour;
-        this.hourDebut = hourDebut;
-        this.hourFin = hourFin;
+    public Disponibilite() {
     }
 
     public int getIdDisponibilite() {

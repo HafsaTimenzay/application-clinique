@@ -12,13 +12,8 @@ public class RendezVous {
     private Time horaire;
 
 
-    public RendezVous(int id, String type, long medecinId, int patientId, Date dateRendezVous, Time horaire) {
-        this.id = id;
-        this.type = type;
-        this.medecinId = medecinId;
-        this.patientId = patientId;
-        this.dateRendezVous = dateRendezVous;
-        this.horaire = horaire;
+    public RendezVous() {
+
     }
 
 

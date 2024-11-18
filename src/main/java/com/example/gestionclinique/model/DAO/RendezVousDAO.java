@@ -1,8 +1,11 @@
-package com.example.gestionclinique.model.database.DAO;
+package com.example.gestionclinique.model.DAO;
 
 import com.example.gestionclinique.model.RendezVous;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
