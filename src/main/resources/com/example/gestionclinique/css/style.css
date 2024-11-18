@@ -177,3 +177,17 @@
 .check-box:disabled {
     -fx-opacity: 0.6;                 /* Transparency for disabled state */
 }
+
+
+.radio-button .radio {
+    -fx-background-color: #fff;
+    -fx-border-color: #000;
+    -fx-border-width: 0.5px;
+    -fx-border-radius: 50%;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: #cf341e;
+    -fx-border-color: #cf341e;
+}
+

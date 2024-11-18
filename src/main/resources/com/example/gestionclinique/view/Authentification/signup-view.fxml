@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,52 +10,54 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.example.gestionclinique.controller.AuthController">
-<children>
-    <AnchorPane prefHeight="494.0" prefWidth="358.0" style="-fx-background-color: #cf341e;">
-        <children>
-            <ImageView fitHeight="244.0" fitWidth="244.0" layoutX="61.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../../images/2.png" />
-                </image>
-            </ImageView>
-            <ImageView fitHeight="236.0" fitWidth="337.0" layoutX="14.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../../images/Doctors-pana.png" />
-                </image>
-            </ImageView>
-        </children></AnchorPane>
-    <AnchorPane prefHeight="494.0" prefWidth="433.0" style="-fx-background-color: #f1f3f4;">
-        <children>
-            <Button layoutX="76.0" layoutY="413.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="282.0" style="-fx-background-color: #FF725E;" text="Sign Up" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="14.0" />
-                </font>
-            </Button>
-            <TextField  layoutX="71.0" layoutY="152.0" prefHeight="33.0" prefWidth="137.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="789.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../../css/style.css" fx:controller="com.example.gestionclinique.controller.AuthController">
+    <children>
+        <AnchorPane prefHeight="494.0" prefWidth="358.0" style="-fx-background-color: #cf341e;">
+            <children>
+                <ImageView fitHeight="244.0" fitWidth="244.0" layoutX="61.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/2.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="236.0" fitWidth="337.0" layoutX="14.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../images/Doctors-pana.png" />
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+        <AnchorPane prefHeight="494.0" prefWidth="433.0" style="-fx-background-color: #f1f3f4;">
+            <children>
+                <Button layoutX="76.0" layoutY="432.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="282.0" style="-fx-background-color: #FF725E;" text="Sign Up" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+                <TextField layoutX="71.0" layoutY="136.0" prefHeight="33.0" prefWidth="137.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
 
-            <Label layoutX="155.0" layoutY="31.0" text="Sing Up">
-                <font>
-                    <Font name="System Bold" size="31.0" />
-                </font>
-            </Label>
-            <Label layoutX="71.0" layoutY="127.0" text="Nom " />
-            <Label layoutX="115.0" layoutY="82.0">
-                <font>
-                    <Font size="13.0" />
-                </font>
-            </Label>
-            <Label layoutX="222.0" layoutY="127.0" text="Prenom" />
-            <TextField layoutX="222.0" layoutY="152.0" prefHeight="33.0" prefWidth="137.0" promptText="Prenom" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
-            <Label layoutX="71.0" layoutY="196.0" text="Email" />
-            <TextField layoutX="71.0" layoutY="220.0" prefHeight="33.0" prefWidth="290.0" promptText="xxx@xx.x" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
-            <TextField layoutX="71.0" layoutY="288.0" prefHeight="33.0" prefWidth="290.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
-            <Label layoutX="72.0" layoutY="263.0" text="Telephone" />
-            <TextField layoutX="72.0" layoutY="358.0" prefHeight="33.0" prefWidth="137.0" promptText="0000000000" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
-            <Label layoutX="72.0" layoutY="333.0" text="Password" />
-            <Label layoutX="223.0" layoutY="333.0" text="Confirm Password" />
-            <TextField layoutX="223.0" layoutY="358.0" prefHeight="33.0" prefWidth="137.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
-        </children></AnchorPane>
+                <Label layoutX="155.0" layoutY="31.0" text="Sign Up">
+                    <font>
+                        <Font name="System Bold" size="31.0" />
+                    </font>
+                </Label>
+                <Label layoutX="71.0" layoutY="111.0" text="First name" />
+                <Label layoutX="222.0" layoutY="111.0" text="Last name" />
+                <Label layoutX="71.0" layoutY="183.0" text="Role" />
 
-</children>
+                <!-- RadioButtons with the same ToggleGroup -->
+                <RadioButton layoutX="141.0" layoutY="184.0" mnemonicParsing="false" text="Medecin" fx:id="medecinRadio" />
+                <RadioButton layoutX="270.0" layoutY="184.0" mnemonicParsing="false" text="Patient" fx:id="patientRadio" />
+
+                <TextField layoutX="222.0" layoutY="136.0" prefHeight="33.0" prefWidth="137.0" promptText="Prenom" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+                <Label layoutX="71.0" layoutY="212.0" text="Email" />
+                <TextField layoutX="71.0" layoutY="236.0" prefHeight="33.0" prefWidth="290.0" promptText="xxx@xx.x" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+                <TextField layoutX="71.0" layoutY="304.0" prefHeight="33.0" prefWidth="290.0" promptText="06/07 00 00 00 00" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+                <Label layoutX="72.0" layoutY="279.0" text="Telephone" />
+                <TextField layoutX="72.0" layoutY="374.0" prefHeight="33.0" prefWidth="137.0" promptText="*****" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+                <Label layoutX="72.0" layoutY="349.0" text="Password" />
+                <Label layoutX="223.0" layoutY="349.0" text="Confirm Password" />
+                <TextField layoutX="223.0" layoutY="374.0" prefHeight="33.0" prefWidth="137.0" promptText="*****" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+            </children>
+        </AnchorPane>
+    </children>
 </HBox>
