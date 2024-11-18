@@ -2,6 +2,7 @@ module com.example.gestionclinique {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
+    requires java.sql;
 
     // Open the com.example.gestionclinique package to javafx.fxml for reflection
     opens com.example.gestionclinique to javafx.fxml;

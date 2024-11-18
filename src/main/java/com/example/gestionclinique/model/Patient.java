@@ -1,61 +1,124 @@
 package com.example.gestionclinique.model;
 
+
+import java.sql.Date;
+
 public class Patient {
-    private Long id;
+    private int idPatient;
     private String nom;
     private String prenom;
     private String sexe;
-    private String cin;
-    private String gsm;
-    private int age;
+    private String CIN;
+    private String GSM;
+    private Date dateNaissance;
     private String adresse;
     private double taille;
     private double poids;
+    private long compteId;
 
-    public Patient() {}
-
-    public Patient(Long id, String nom, String prenom, String sexe, String cin, String gsm, int age, String adresse, double taille, double poids) {
-        this.id = id;
+    // Constructeurs, getters et setters
+    public Patient(int idPatient, String nom, String prenom, String sexe, String CIN, String GSM,
+                   Date dateNaissance, String adresse, double taille, double poids, long compteId) {
+        this.idPatient = idPatient;
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
-        this.cin = cin;
-        this.gsm = gsm;
-        this.age = age;
+        this.CIN = CIN;
+        this.GSM = GSM;
+        this.dateNaissance = dateNaissance;
         this.adresse = adresse;
         this.taille = taille;
         this.poids = poids;
+        this.compteId = compteId;
     }
 
-    // Getters and Setters
+    // Getters et Setters
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public int getIdPatient() {
+        return idPatient;
+    }
 
-    public String getNom() { return nom; }
-    public void setNom(String nom) { this.nom = nom; }
+    public void setIdPatient(int idPatient) {
+        this.idPatient = idPatient;
+    }
 
-    public String getPrenom() { return prenom; }
-    public void setPrenom(String prenom) { this.prenom = prenom; }
+    public String getNom() {
+        return nom;
+    }
 
-    public String getSexe() { return sexe; }
-    public void setSexe(String sexe) { this.sexe = sexe; }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
-    public String getCin() { return cin; }
-    public void setCin(String cin) { this.cin = cin; }
+    public String getPrenom() {
+        return prenom;
+    }
 
-    public String getGsm() { return gsm; }
-    public void setGsm(String gsm) { this.gsm = gsm; }
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
 
-    public int getAge() { return age; }
-    public void setAge(int age) { this.age = age; }
+    public String getSexe() {
+        return sexe;
+    }
 
-    public String getAdresse() { return adresse; }
-    public void setAdresse(String adresse) { this.adresse = adresse; }
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
+    }
 
-    public double getTaille() { return taille; }
-    public void setTaille(double taille) { this.taille = taille; }
+    public String getCIN() {
+        return CIN;
+    }
 
-    public double getPoids() { return poids; }
-    public void setPoids(double poids) { this.poids = poids; }
+    public void setCIN(String CIN) {
+        this.CIN = CIN;
+    }
+
+    public String getGSM() {
+        return GSM;
+    }
+
+    public void setGSM(String GSM) {
+        this.GSM = GSM;
+    }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public double getTaille() {
+        return taille;
+    }
+
+    public void setTaille(double taille) {
+        this.taille = taille;
+    }
+
+    public double getPoids() {
+        return poids;
+    }
+
+    public void setPoids(double poids) {
+        this.poids = poids;
+    }
+
+    public long getCompteId() {
+        return compteId;
+    }
+
+    public void setCompteId(long compteId) {
+        this.compteId = compteId;
+    }
 }

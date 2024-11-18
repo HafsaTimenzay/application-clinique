@@ -15,8 +15,9 @@
             <Font size="18.0" />
         </font>
     </Label>
+
     <!-- Days and Times -->
-    <Label layoutX="130.0" layoutY="98.0" style="-fx-font-size: 14px;" stylesheets="@../../css/style.css" text="Sunday" />
+    <Label layoutX="130.0" layoutY="98.0" style="-fx-font-size: 14px;" text="Sunday" />
     <CheckBox layoutX="83.0" layoutY="92.0" />
     <TextField layoutX="222.0" layoutY="94.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="98.0" style="-fx-font-size: 14px;" text="to" />
@@ -58,8 +59,11 @@
     <Label layoutX="362.0" layoutY="425.0" style="-fx-font-size: 14px;" text="to" />
     <TextField layoutX="396.0" layoutY="421.0" prefWidth="120" promptText="End Time" />
 
-   <ComboBox layoutX="615.0" layoutY="143.0" prefHeight="37.0" prefWidth="244.0" promptText="2024/03/01 - 2024/03/08" />
-   <Label layoutX="614.0" layoutY="95.0" style="-fx-font-size: 14px;" text="Choose the week" />
-   <Button fx:id="saveButton" layoutX="770.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" />
+    <!-- Week Selection -->
+    <ComboBox layoutX="615.0" layoutY="143.0" prefHeight="37.0" prefWidth="244.0" promptText="2024/03/01 - 2024/03/08" />
+    <Label layoutX="614.0" layoutY="95.0" style="-fx-font-size: 14px;" text="Choose the week" />
+
+    <!-- Save Button -->
+    <Button fx:id="saveButton" layoutX="770.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" />
 
 </AnchorPane>
