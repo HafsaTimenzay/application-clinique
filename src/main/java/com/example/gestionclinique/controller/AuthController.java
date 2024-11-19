@@ -1,27 +1,61 @@
 package com.example.gestionclinique.controller;
 
+import com.example.gestionclinique.model.Compte;
+import com.example.gestionclinique.model.DAO.CompteDAO;
+import com.example.gestionclinique.model.util.ConnectionUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
 import javafx.scene.Node;  // Import Node class
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
-public class AuthController extends PatientController{
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class AuthController {
 
     @FXML
-    private TextField usernameField;  // Email field
+    private TextField emailField;  // Email field
     @FXML
     private PasswordField passwordField;  // Password field
+    @FXML
+    private PasswordField password;
+    @FXML
+    private RadioButton medecinRadio;
+    @FXML
+    private RadioButton patientRadio;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField lastName;
+
+
+
+    private ToggleGroup userTypeGroup;
+
+
+    // String email, String username, String password, String confirmPassword, String typeUtilisateur
+
+    private CompteDAO compteDAO;
+
+    public AuthController() {
+        try {
+            // Initialize database connection
+            Connection connection = ConnectionUtil.getConnection();
+            compteDAO = new CompteDAO(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     // Function to validate the email and password
-    public boolean validateCredentials() {
-        String email = usernameField.getText();
-        String password = passwordField.getText();
+    public boolean validateCredentials(String email, String password) {
 
         // Validate email
         if (email == null || email.isEmpty() || !email.contains("@") || !email.contains(".")) {
@@ -29,19 +63,25 @@ public class AuthController extends PatientController{
             return false;
         }
 
-        // Validate password (just check if it's not empty for now)
+        // Validate password
         if (password == null || password.isEmpty()) {
             showAlert("Invalid Password", "Password cannot be empty.");
             return false;
         }
 
-        // Check for valid hardcoded credentials (as you have in your code)
-        if (!password.equals("p") || !email.equals("e@e.e")) {
-            showAlert("User not Found", "Password or email is incorrect");
+        try {
+            // Authenticate against the database
+            if (compteDAO.authenticate(email, password)) {
+                return true;
+            } else {
+                showAlert("User not Found", "Password or email is incorrect");
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert("Error", "An error occurred while checking credentials.");
             return false;
         }
-
-        return true;  // Email and password are valid
     }
 
     // Show alert for invalid input
@@ -57,18 +97,13 @@ public class AuthController extends PatientController{
     @FXML
     private void handleLoginClick(ActionEvent event) {
         try {
-            if (validateCredentials()) {
-                // Load the main view (includes sidebar and contentPane)
+            if (validateCredentials(emailField.getText(), passwordField.getText())) {
+                // Load the main view (patient or doctor dashboard)
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
                 Parent root = loader.load();
 
                 // Get the controller of the main view
-                PatientController patientController = loader.getController();
-
-                // Call the loadProfilePage() method to display the profile page
-                patientController.loadProfilePage();
-
-                // Switch to the main view scene
+                // Handle dashboard loading based on user type (Medecin or Patient)
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);
@@ -80,8 +115,6 @@ public class AuthController extends PatientController{
             e.printStackTrace();
         }
     }
-
-
 
     // Signup button handler
     @FXML
@@ -102,5 +135,48 @@ public class AuthController extends PatientController{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+
+
+
+    // Handle sign-up form submission
+    public void handleSignupSubmit() {
+
+        ToggleGroup userTypeGroup = new ToggleGroup();
+        medecinRadio.setToggleGroup(userTypeGroup); // Error occurs here
+        patientRadio.setToggleGroup(userTypeGroup);
+
+        RadioButton selectedButton = (RadioButton) userTypeGroup.getSelectedToggle();
+        String typeUtilisateur = selectedButton != null ? selectedButton.getText() : null;
+
+        if(email.getText() == null || email.getText().isEmpty() || password.getText() == null || password.getText().isEmpty()
+        || firstName.getText() == null || firstName.getText().isEmpty() || lastName.getText() == null || lastName.getText().isEmpty()
+                || typeUtilisateur == null || typeUtilisateur.isEmpty() ) {
+            showAlert(null, "Please fill all the fields");
+        }else{
+            if (validateCredentials(email.getText(), password.getText())){
+                // Create a new Compte object
+                Compte compte = new Compte();
+                compte.setEmail(email.getText());
+                compte.setFirstName(firstName.getText());
+                compte.setLastName(lastName.getText());
+                compte.setPassword(password.getText());
+                compte.setTypeUtilisateur(typeUtilisateur);
+
+                try {
+                    // Insert the new compte into the database
+                    compteDAO.createCompte(compte);
+                    showAlert("Success", "Account successfully created.");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    showAlert("Error", "An error occurred while creating the account.");
+                }
+            }else {
+                showAlert(null, "enter correct email");
+            }
+
+        }
+
     }
 }

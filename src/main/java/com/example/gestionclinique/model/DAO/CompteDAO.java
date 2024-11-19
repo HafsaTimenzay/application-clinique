@@ -16,35 +16,45 @@ public class CompteDAO {
     }
 
     public void createCompte(Compte compte) throws SQLException {
-        String sql = "INSERT INTO Compte (id_compte, email, username, password, type_utilisateur) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Compte (email, firstName, lastName, password, type_utilisateur) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setLong(1, compte.getIdCompte());
-            stmt.setString(2, compte.getEmail());
-            stmt.setString(3, compte.getUsername());
+            stmt.setString(1, compte.getEmail());
+            stmt.setString(2, compte.getFirstName());
+            stmt.setString(3, compte.getLastName());
             stmt.setString(4, compte.getPassword());
             stmt.setString(5, compte.getTypeUtilisateur());
             stmt.executeUpdate();
         }
     }
 
+
     public Compte getCompteById(long id) throws SQLException {
         String sql = "SELECT * FROM Compte WHERE id_compte = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
+
             if (rs.next()) {
-                return new Compte(rs.getLong("id_compte"), rs.getString("email"),
-                        rs.getString("username"), rs.getString("password"),
-                        rs.getString("type_utilisateur"));
+                // Create a new Compte object
+                Compte compte = new Compte();
+                compte.setEmail(rs.getString("email"));
+                compte.setFirstName(rs.getString("firstName"));
+                compte.setLastName(rs.getString("lastName"));
+                compte.setPassword(rs.getString("password"));
+                compte.setTypeUtilisateur(rs.getString("type_utilisateur"));
+
+                return compte;
             }
-            return null;
         }
+
+        return null;
     }
 
-    public boolean authenticate(String username, String password) throws SQLException {
-        String sql = "SELECT * FROM Compte WHERE username = ? AND password = ?";
+
+    public boolean authenticate(String email, String password) throws SQLException {
+        String sql = "SELECT * FROM Compte WHERE email = ? AND password = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setString(1, username);
+            stmt.setString(1, email);
             stmt.setString(2, password);
             ResultSet rs = stmt.executeQuery();
             return rs.next();
@@ -52,13 +62,14 @@ public class CompteDAO {
     }
 
     public void updateCompte(Compte compte) throws SQLException {
-        String sql = "UPDATE Compte SET email = ?, username = ?, password = ?, type_utilisateur = ? WHERE id_compte = ?";
+        String sql = "UPDATE Compte SET email = ?, firstName = ?, lastName = ?, password = ?, type_utilisateur = ? WHERE id_compte = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, compte.getEmail());
-            stmt.setString(2, compte.getUsername());
-            stmt.setString(3, compte.getPassword());
-            stmt.setString(4, compte.getTypeUtilisateur());
-            stmt.setLong(5, compte.getIdCompte());
+            stmt.setString(2, compte.getFirstName());
+            stmt.setString(3, compte.getLastName());
+            stmt.setString(4, compte.getPassword());
+            stmt.setString(5, compte.getTypeUtilisateur());
+            stmt.setLong(6, compte.getIdCompte());
             stmt.executeUpdate();
         }
     }

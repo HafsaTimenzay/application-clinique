@@ -30,7 +30,7 @@
                </font>
             </Label>
             <Label layoutX="81.0" layoutY="157.0" text="Email" />
-            <TextField fx:id="usernameField" layoutX="74.0" layoutY="185.0" prefHeight="33.0" prefWidth="282.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+            <TextField fx:id="emailField" layoutX="74.0" layoutY="185.0" prefHeight="33.0" prefWidth="282.0" promptText="Email" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
             <Label layoutX="81.0" layoutY="229.0" text="Password" />
             <PasswordField fx:id="passwordField" layoutX="76.0" layoutY="254.0" prefHeight="33.0" prefWidth="282.0" promptText="Password" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
             <Button  layoutX="74.0" layoutY="323.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="282.0" style="-fx-background-color: #FF725E;" text="Login" textFill="WHITE" onAction="#handleLoginClick">
