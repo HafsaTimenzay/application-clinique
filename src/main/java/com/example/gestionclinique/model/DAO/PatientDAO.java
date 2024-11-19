@@ -31,6 +31,15 @@ public class PatientDAO {
         }
     }
 
+    public boolean InsertPatientSignUp(Patient patient) throws SQLException {
+        String query = "INSERT INTO Patient (nom, prenom) VALUES (?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, patient.getNom());
+            stmt.setString(2, patient.getPrenom());
+            return stmt.executeUpdate()>0;
+        }
+    }
+
     // Retrieve Patient by ID
     public Patient getPatientById(int id) throws SQLException {
         String query = "SELECT * FROM Patient WHERE idPatient = ?";
@@ -58,7 +67,7 @@ public class PatientDAO {
     }
 
     // Update Patient
-    public void updatePatient(Patient patient) throws SQLException {
+    public boolean updatePatient(Patient patient) throws SQLException {
         String query = "UPDATE Patient SET nom = ?, prenom = ?, sexe = ?, CIN = ?, GSM = ?, dateNaissance = ?, adresse = ?, taille = ?, poids = ?, compteId = ? WHERE idPatient = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, patient.getNom());
@@ -72,7 +81,7 @@ public class PatientDAO {
             stmt.setDouble(9, patient.getPoids());
             stmt.setLong(10, patient.getCompteId());
             stmt.setInt(11, patient.getIdPatient());
-            stmt.executeUpdate();
+            return stmt.executeUpdate()>0;
         }
     }
 

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -35,9 +36,16 @@ public class ProfilController {
     @FXML
     private ComboBox genderComboBox;
 
+    private BorderPane mainPane;
+    private Long compteId;
+
 
 
     private final PatientDAO patientDAO;
+
+    public void setCompteId(Long compteId) {
+        this.compteId = compteId;
+    }
 
     public ProfilController() throws SQLException {
         Connection connection = ConnectionUtil.getConnection();
@@ -45,8 +53,10 @@ public class ProfilController {
     }
 
     public void updateProfile() throws SQLException {
-        Patient patient = patientDAO.getPatientById(patient.getCompteId());
-
+        Patient patient = patientDAO.getPatientById(6);
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        Date birthDate = Date.valueOf(birthDatePicker.getValue());
         String cin = cinField.getText();
         String gsm = gsmField.getText();
         String address = addressField.getText();
@@ -57,12 +67,14 @@ public class ProfilController {
         // condition regExp
 
         if (patient != null) {
+            patient.setNom(firstName);
+            patient.setPrenom(lastName);
             patient.setCIN(cin);
             patient.setGSM(gsm);
             patient.setAdresse(address);
             patient.setTaille(height);
             patient.setPoids(weight);
-            patient.setDateNaissance(Date.valueOf(birthDatePicker.getValue()));
+            patient.setDateNaissance(birthDate);
             patient.setSexe(gender);
 
             patientDAO.updatePatient(patient);
@@ -72,14 +84,14 @@ public class ProfilController {
     }
 
     // Method to insert a patient during signup
-    public void signup() throws SQLException {
-        Patient patient = new Patient();
-        patient.setNom(firstNameField.getText());
-        patient.setPrenom(lastNameField.getSelectedText());// GSM can temporarily hold the email in this example
-        patient.setCompteId(compteId);
+    //public void signup() throws SQLException {
+     //   Patient patient = new Patient();
+    //    patient.setNom(firstNameField.getText());
+    //    patient.setPrenom(lastNameField.getSelectedText());// GSM can temporarily hold the email in this example
+    //    patient.setCompteId(compteId);
 
-        patientDAO.InsertPatient(patient);
-    }
+    //    patientDAO.InsertPatient(patient);
+    //}
 
     // Method to update the profile after completing additional details
 
