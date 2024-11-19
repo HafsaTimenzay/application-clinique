@@ -2,62 +2,71 @@ package com.example.gestionclinique.model.DAO;
 
 import com.example.gestionclinique.model.Patient;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientDAO {
-
-    private Connection connection;
+    private final Connection connection;
 
     public PatientDAO(Connection connection) {
         this.connection = connection;
     }
 
-    public void createPatient(Patient patient) throws SQLException {
-        String sql = "INSERT INTO Patient (id_patient, nom, prenom, sexe, CIN, GSM, DateNaissance, adresse, Taille, poids, compte_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, patient.getIdPatient());
-            stmt.setString(2, patient.getNom());
-            stmt.setString(3, patient.getPrenom());
-            stmt.setString(4, patient.getSexe());
-            stmt.setString(5, patient.getCIN());
-            stmt.setString(6, patient.getGSM());
-            stmt.setDate(7, patient.getDateNaissance());
-            stmt.setString(8, patient.getAdresse());
-            stmt.setDouble(9, patient.getTaille());
-            stmt.setDouble(10, patient.getPoids());
-            stmt.setLong(11, patient.getCompteId());
-            stmt.executeUpdate();
-        }
-    }
-
-    public Patient getPatientById(int id) throws SQLException {
-        String sql = "SELECT * FROM Patient WHERE id_patient = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return new Patient(rs.getInt("id_patient"), rs.getString("nom"),
-                        rs.getString("prenom"), rs.getString("sexe"), rs.getString("CIN"),
-                        rs.getString("GSM"), rs.getDate("DateNaissance"),
-                        rs.getString("adresse"), rs.getDouble("Taille"),
-                        rs.getDouble("poids"), rs.getLong("compte_id"));
-            }
-            return null;
-        }
-    }
-
-    public void updatePatient(Patient patient) throws SQLException {
-        String sql = "UPDATE Patient SET nom = ?, prenom = ?, sexe = ?, CIN = ?, GSM = ?, DateNaissance = ?, adresse = ?, Taille = ?, poids = ?, compte_id = ? WHERE id_patient = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+    // Add Patient
+    public void InsertPatient(Patient patient) throws SQLException {
+        String query = "INSERT INTO Patient (nom, prenom, sexe, CIN, GSM, dateNaissance, adresse, taille, poids, compteId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, patient.getNom());
             stmt.setString(2, patient.getPrenom());
             stmt.setString(3, patient.getSexe());
             stmt.setString(4, patient.getCIN());
             stmt.setString(5, patient.getGSM());
-            stmt.setDate(6, patient.getDateNaissance());
+            stmt.setDate(6, new java.sql.Date(patient.getDateNaissance().getTime()));
+            stmt.setString(7, patient.getAdresse());
+            stmt.setDouble(8, patient.getTaille());
+            stmt.setDouble(9, patient.getPoids());
+            stmt.setLong(10, patient.getCompteId());
+            stmt.executeUpdate();
+        }
+    }
+
+    // Retrieve Patient by ID
+    public Patient getPatientById(int id) throws SQLException {
+        String query = "SELECT * FROM Patient WHERE idPatient = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return mapResultSetToPatient(rs);
+            }
+        }
+        return null;
+    }
+
+    // Retrieve All Patients
+    public List<Patient> getAllPatients() throws SQLException {
+        List<Patient> patients = new ArrayList<>();
+        String query = "SELECT * FROM Patient";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                patients.add(mapResultSetToPatient(rs));
+            }
+        }
+        return patients;
+    }
+
+    // Update Patient
+    public void updatePatient(Patient patient) throws SQLException {
+        String query = "UPDATE Patient SET nom = ?, prenom = ?, sexe = ?, CIN = ?, GSM = ?, dateNaissance = ?, adresse = ?, taille = ?, poids = ?, compteId = ? WHERE idPatient = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, patient.getNom());
+            stmt.setString(2, patient.getPrenom());
+            stmt.setString(3, patient.getSexe());
+            stmt.setString(4, patient.getCIN());
+            stmt.setString(5, patient.getGSM());
+            stmt.setDate(6, new java.sql.Date(patient.getDateNaissance().getTime()));
             stmt.setString(7, patient.getAdresse());
             stmt.setDouble(8, patient.getTaille());
             stmt.setDouble(9, patient.getPoids());
@@ -67,11 +76,29 @@ public class PatientDAO {
         }
     }
 
+    // Delete Patient
     public void deletePatient(int id) throws SQLException {
-        String sql = "DELETE FROM Patient WHERE id_patient = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+        String query = "DELETE FROM Patient WHERE idPatient = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         }
+    }
+
+    // Map ResultSet to Patient
+    private Patient mapResultSetToPatient(ResultSet rs) throws SQLException {
+        Patient patient = new Patient();
+        patient.setIdPatient(rs.getInt("idPatient"));
+        patient.setNom(rs.getString("nom"));
+        patient.setPrenom(rs.getString("prenom"));
+        patient.setSexe(rs.getString("sexe"));
+        patient.setCIN(rs.getString("CIN"));
+        patient.setGSM(rs.getString("GSM"));
+        patient.setDateNaissance(rs.getDate("dateNaissance"));
+        patient.setAdresse(rs.getString("adresse"));
+        patient.setTaille(rs.getDouble("taille"));
+        patient.setPoids(rs.getDouble("poids"));
+        patient.setCompteId(rs.getLong("compteId"));
+        return patient;
     }
 }

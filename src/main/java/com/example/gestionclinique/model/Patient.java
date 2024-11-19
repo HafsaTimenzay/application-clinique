@@ -17,20 +17,7 @@ public class Patient {
     private long compteId;
 
     // Constructeurs, getters et setters
-    public Patient(int idPatient, String nom, String prenom, String sexe, String CIN, String GSM,
-                   Date dateNaissance, String adresse, double taille, double poids, long compteId) {
-        this.idPatient = idPatient;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.sexe = sexe;
-        this.CIN = CIN;
-        this.GSM = GSM;
-        this.dateNaissance = dateNaissance;
-        this.adresse = adresse;
-        this.taille = taille;
-        this.poids = poids;
-        this.compteId = compteId;
-    }
+    public Patient(){}
 
     // Getters et Setters
 

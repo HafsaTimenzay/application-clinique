@@ -1,5 +1,9 @@
 package com.example.gestionclinique.controller;
 
+import com.example.gestionclinique.model.DAO.PatientDAO;
+import com.example.gestionclinique.model.Patient;
+import com.example.gestionclinique.model.util.ConnectionUtil;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,6 +14,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class PatientController {
 
@@ -18,6 +26,7 @@ public class PatientController {
 
     @FXML
     private Label pageTitle;
+
 
     /**
      * Load the Dashboard view into the contentPane.
@@ -87,5 +96,6 @@ public class PatientController {
             e.printStackTrace();
         }
     }
+
 
 }

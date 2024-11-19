@@ -2,6 +2,8 @@ package com.example.gestionclinique.controller;
 
 import com.example.gestionclinique.model.Compte;
 import com.example.gestionclinique.model.DAO.CompteDAO;
+import com.example.gestionclinique.model.Patient;
+import com.example.gestionclinique.model.DAO.PatientDAO;
 import com.example.gestionclinique.model.util.ConnectionUtil;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -45,12 +47,14 @@ public class AuthController {
     // String email, String username, String password, String confirmPassword, String typeUtilisateur
 
     private CompteDAO compteDAO;
+    private PatientDAO patientDAO;
 
     public AuthController() {
         try {
             // Initialize database connection
             Connection connection = ConnectionUtil.getConnection();
             compteDAO = new CompteDAO(connection);
+            patientDAO = new PatientDAO(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -195,9 +199,18 @@ public class AuthController {
                 compte.setPassword(password.getText());
                 compte.setTypeUtilisateur(typeUtilisateur);
 
+                Patient patient = new Patient();
+                System.out.println(compte.getIdCompte());
+                patient.setCompteId(compte.getIdCompte());
+                patient.setNom(firstName.getText());
+                patient.setPrenom(lastName.getText());
+
+
+
                 try {
                     // Insert the new compte into the database
                     compteDAO.createCompte(compte);
+                    patientDAO.InsertPatient(patient);
 
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
                     Parent root = loader.load();

@@ -9,7 +9,7 @@
             stylesheets="@../../css/style.css"
             xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.gestionclinique.controller.ProfielController">
+            fx:controller="com.example.gestionclinique.controller.ProfilController">
 
     <!-- Section Header -->
     <Label layoutX="44.0" layoutY="35.0" style="-fx-font-weight: bold;" text="Personal Information">
@@ -82,6 +82,13 @@
     </Label>
     <TextField fx:id="heightField" layoutX="360.0" layoutY="318.0" prefHeight="40.0" prefWidth="130.0" promptText="Enter height" />
 
+    <TextField fx:id="cinField" layoutX="360.0" layoutY="318.0" prefHeight="40.0" prefWidth="130.0" promptText="Enter you CIN" />
+    <Label layoutX="295.0" layoutY="318.0" text="CIN">
+        <font>
+            <Font size="17.0" />
+        </font>
+    </Label>
+
     <!-- Address -->
     <Label layoutX="44.0" layoutY="388.0" text="Address">
         <font>
@@ -91,5 +98,5 @@
     <TextField fx:id="addressField" layoutX="144.0" layoutY="388.0" prefHeight="40.0" prefWidth="225.0" promptText="Enter address" />
 
     <!-- Save Button -->
-    <Button fx:id="saveButton" layoutX="776.0" layoutY="454.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" />
+    <Button fx:id="saveButton" layoutX="776.0" layoutY="454.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" onAction="#updateProfile"/>
 </AnchorPane>
