@@ -3,6 +3,7 @@ package com.example.gestionclinique.controller;
 import com.example.gestionclinique.model.Compte;
 import com.example.gestionclinique.model.DAO.CompteDAO;
 import com.example.gestionclinique.model.util.ConnectionUtil;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import javafx.scene.Node;  // Import Node class
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -69,19 +71,7 @@ public class AuthController {
             return false;
         }
 
-        try {
-            // Authenticate against the database
-            if (compteDAO.authenticate(email, password)) {
-                return true;
-            } else {
-                showAlert("User not Found", "Password or email is incorrect");
-                return false;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            showAlert("Error", "An error occurred while checking credentials.");
-            return false;
-        }
+        return  true;
     }
 
     // Show alert for invalid input
@@ -97,23 +87,64 @@ public class AuthController {
     @FXML
     private void handleLoginClick(ActionEvent event) {
         try {
-            if (validateCredentials(emailField.getText(), passwordField.getText())) {
-                // Load the main view (patient or doctor dashboard)
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
-                Parent root = loader.load();
+            // Authenticate against the database
+            if (compteDAO.authenticate(emailField.getText(),  passwordField.getText())) {
+                try {
+                    System.out.println(compteDAO.getUserType(emailField.getText(), passwordField.getText()));
+                    if(compteDAO.getUserType(emailField.getText(), passwordField.getText()).equals("Patient")){
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
+                        Parent root = loader.load();
 
-                // Get the controller of the main view
-                // Handle dashboard loading based on user type (Medecin or Patient)
-                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(root);
-                currentStage.setScene(scene);
-                currentStage.setMaximized(true);
-                currentStage.setTitle("Gestion Clinique - Dashboard");
-                currentStage.show();
+                        // Get the PatientController instance
+                        PatientController patientController = loader.getController();
+
+                        // Call the loadProfilePage() method to display the profile page
+                        patientController.loadDashboard();
+
+                        // Switch to the main-patient scene
+                        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        currentStage.setScene(scene);
+                        currentStage.setMaximized(true);
+                        currentStage.setTitle("Patient Dashboard");
+                        currentStage.show();
+                    }
+
+                    if(compteDAO.getUserType(emailField.getText(), passwordField.getText()).equals("Medecin")){
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/medecin/main-medecin.fxml"));
+                        Parent root = loader.load();
+
+                        // Get the MedecinController instance
+                        MedecinController medecinController = loader.getController();
+
+                        // Call the loadProfilePageMe() method to display the profile page
+                        medecinController.loadDashboard();
+
+                        // Switch to the main-medecin scene
+                        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        Scene scene = new Scene(root);
+                        currentStage.setScene(scene);
+                        currentStage.setMaximized(true);
+                        currentStage.setTitle("Medecin Dashboard");
+                        currentStage.show();
+
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                showAlert("User not Found", "Password or email is incorrect");
+
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
+            showAlert("Error", "An error occurred while checking credentials.");
+
         }
+
+
     }
 
     // Signup button handler
@@ -141,7 +172,7 @@ public class AuthController {
 
 
     // Handle sign-up form submission
-    public void handleSignupSubmit() {
+    public void handleSignupSubmit(ActionEvent event) {
 
         ToggleGroup userTypeGroup = new ToggleGroup();
         medecinRadio.setToggleGroup(userTypeGroup); // Error occurs here
@@ -167,16 +198,34 @@ public class AuthController {
                 try {
                     // Insert the new compte into the database
                     compteDAO.createCompte(compte);
-                    showAlert("Success", "Account successfully created.");
+
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
+                    Parent root = loader.load();
+
+                    // Get the PatientController instance
+                    PatientController patientController = loader.getController();
+
+                    // Call the loadProfilePage() method to display the profile page
+                    patientController.loadProfilePage();
+
+                    // Switch to the main-patient scene
+                    Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    currentStage.setScene(scene);
+                    currentStage.setMaximized(true);
+                    currentStage.setTitle("Patient Dashboard");
+                    currentStage.show();
                 } catch (SQLException e) {
                     e.printStackTrace();
                     showAlert("Error", "An error occurred while creating the account.");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
                 }
-            }else {
-                showAlert(null, "enter correct email");
             }
 
         }
 
     }
+
+
 }

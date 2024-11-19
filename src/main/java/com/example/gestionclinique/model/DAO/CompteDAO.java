@@ -61,6 +61,24 @@ public class CompteDAO {
         }
     }
 
+    public String getUserType(String email, String password) throws SQLException {
+        String sql = "SELECT type_utilisateur FROM Compte WHERE email = ? AND password = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                // Return the type_utilisateur if a match is found
+                return rs.getString("type_utilisateur");
+            } else {
+                // Return null or throw an exception if no match is found
+                return null;
+            }
+        }
+    }
+
+
     public void updateCompte(Compte compte) throws SQLException {
         String sql = "UPDATE Compte SET email = ?, firstName = ?, lastName = ?, password = ?, type_utilisateur = ? WHERE id_compte = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {

@@ -29,7 +29,7 @@
                         <Button fx:id="dispnibilityBtnMe"  graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" styleClass="buttonNav" stylesheets="@../../css/style.css" text="Disponibility" onAction="#loadDisponbilty"/>
                         <Button fx:id="redezvousBtnMe" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" styleClass="buttonNav" stylesheets="@../../css/style.css" text="Rendez-vous" onAction="#loadAppointments" />
                         <Button fx:id="consulBtnMe" graphicTextGap="20.0" layoutX="10.0" layoutY="285.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" styleClass="buttonNav" stylesheets="@../../css/style.css" text="Consultation" onAction="#loadConsultation" />
-                        <Button fx:id="profielBtnMe" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" styleClass="buttonNav" stylesheets="@../../css/style.css" text="Profiel" onAction="#loadProfilePage" />
+                        <Button fx:id="profielBtnMe" graphicTextGap="20.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" styleClass="buttonNav" stylesheets="@../../css/style.css" text="Profiel" onAction="#loadProfilePageMe" />
                         <Button fx:id="logoutBtnMe" graphicTextGap="20.0" layoutX="10.0" layoutY="403.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" styleClass="buttonNav" stylesheets="@../../css/style.css" text="Logout" onAction="#logout" />
                     </children>
                 </VBox>

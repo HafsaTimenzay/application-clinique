@@ -3,8 +3,11 @@ package com.example.gestionclinique.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -20,7 +23,7 @@ public class PatientController {
      * Load the Dashboard view into the contentPane.
      */
     @FXML
-    private void loadDashboard() {
+    public void loadDashboard() {
         loadPage("historique-patient.fxml", "/ Dashboard");
     }
 
@@ -36,7 +39,7 @@ public class PatientController {
      * Load the Profile view into the contentPane.
      */
     @FXML
-    protected void loadProfilePage() {
+    public void loadProfilePage() {
         loadPage("profil-patient.fxml", "/ Profiel");
     }
 
@@ -46,8 +49,20 @@ public class PatientController {
      */
     @FXML
     private void logout() {
-        // Implement your logout logic here
-        System.out.println("Logout clicked");
+        try {
+            // Load the login FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/Authentification/login-view.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage (window) and set the new scene
+            Stage currentStage = (Stage) contentPane.getScene().getWindow(); // or pageTitle.getScene().getWindow()
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.setTitle("Login");
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -56,7 +71,7 @@ public class PatientController {
      * @param fxmlFile the FXML file to load
      * @param title    the title to display
      */
-    private void loadPage(String fxmlFile, String title) {
+    public void loadPage(String fxmlFile, String title) {
         try {
             // Ensure the path is relative to the resource folder
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/" + fxmlFile));
