@@ -191,10 +191,11 @@ public class AuthController {
 
         // Retrieve the controller from the FXMLLoader
         PatientController patientController = loader.getController();
-        //patientController.loadProfilePage();
+
 
         // Call ProfileSave() to pass the patient data to the controller and print the name
         patientController.ProfileSave(patient);
+        patientController.loadProfilePage();
 
         // Show the new scene
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();

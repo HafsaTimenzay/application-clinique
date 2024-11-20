@@ -8,6 +8,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -25,62 +27,27 @@ public class PatientController {
 
     @FXML
     private Label pageTitle;
+
     @FXML
     private TextField firstNameField;
     @FXML
+    private TextField lastNameField;
+    @FXML
+    private DatePicker birthDatePicker;
+    @FXML
+    private TextField gsmField;
+    @FXML
     private TextField emailField;
-
-
-    /**
-     * Load the Dashboard view into the contentPane.
-     */
     @FXML
-    public void loadDashboard() {
-        loadPage("historique-patient.fxml", "/ Dashboard");
-    }
-
-    /**
-     * Load the Appointments view into the contentPane.
-     */
+    private TextField addressField;
     @FXML
-    private void loadAppointments() {
-        loadPage("rendezvous-patient.fxml", "/ Appointment");
-    }
-
-    /**
-     * Load the Profile view into the contentPane.
-     */
+    private TextField weightField;
     @FXML
-    public void loadProfilePage() {
-        loadPage("profil-patient.fxml", "/ Profiel");
-    }
-    // Assuming you're using @FXML to inject this from FXML
-
-    // This is your initialization method, where UI elements are guaranteed to be initialized.
+    private TextField heightField;
     @FXML
-    public void initialize() {
-        System.out.println("firstNameField : " + firstNameField);
-
-        // Check if the firstNameField TextField is set, otherwise just debug it
-        System.out.println("condition to prSave : " + (firstNameField != null));
-
-    }
-    private Patient patientCt;
-    // Now ensure you call ProfileSave() correctly when you load the patient data.
-    public void ProfileSave(Patient patient) {
-        patientCt = patient;
-        // Ensure the firstNameField is not null
-        if (firstNameField != null) {
-            // Print the patient's name to the console
-            System.out.println("Patient's name: " + patientCt.getNom());
-
-            // Set the firstNameField's text to the patient's name
-            firstNameField.setText(patient.getNom());  // Setting the name from the patient object
-        } else {
-            System.out.println("firstNameField is null in ProfileSave()");
-        }
-    }
-
+    private TextField cinField;
+    @FXML
+    private ComboBox genderComboBox;
 
 
     /**
@@ -105,11 +72,53 @@ public class PatientController {
     }
 
     /**
-     * Loads an FXML page into the contentPane and updates the page title.
-     *
-     * @param fxmlFile the FXML file to load
-     * @param title    the title to display
+     * Load the Dashboard view into the contentPane.
      */
+    @FXML
+    public void loadDashboard() {
+        loadPage("historique-patient.fxml", "/ Dashboard");
+    }
+
+    /**
+     * Load the Appointments view into the contentPane.
+     */
+    @FXML
+    private void loadAppointments() {
+        loadPage("rendezvous-patient.fxml", "/ Appointment");
+    }
+
+    /**
+     * Load the Profile view into the contentPane.
+     */
+    @FXML
+    public void loadProfilePage() {loadPage("profil-patient.fxml", "/ Profiel");}
+
+//    @FXML
+//    public void initialize() {
+//        System.out.println("firstNameField : " + firstNameField);
+//
+//        // Check if the firstNameField TextField is set, otherwise just debug it
+//        System.out.println("condition to prSave : " + (firstNameField != null));
+//
+//    }
+    private Patient patientCt;
+
+
+    public void ProfileSave(Patient patient) {
+        patientCt = patient;
+        if (firstNameField != null) {
+            System.out.println("Patient's name: " + patientCt.getEmail());
+
+            firstNameField.setText(patient.getNom());
+            lastNameField.setText(patient.getPrenom());
+
+            emailField.setText(patient.getEmail());
+
+        } else {
+            System.out.println("firstNameField is null in ProfileSave()");
+        }
+    }
+
     public void loadPage(String fxmlFile, String title) {
         try {
             // Ensure the path is relative to the resource folder
@@ -123,15 +132,7 @@ public class PatientController {
             System.out.println("firstNameField from controller: " + patientController.firstNameField);
 
             patientController.ProfileSave(patientCt);
-            // Make sure the TextField is properly injected before calling ProfileSave
-//            if (patientController.firstNameField != null) {
-//                System.out.println("Injecting patient data into firstNameField...");
-//                patientController.firstNameField.setText("HAfsa"); // Example of setting text
-//            } else {
-//                System.out.println("firstNameField is still null after FXML loading!");
-//            }
 
-            // Clear the existing content and load the new page
             contentPane.getChildren().clear();
             contentPane.getChildren().add(page);
 
