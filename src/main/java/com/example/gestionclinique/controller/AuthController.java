@@ -152,19 +152,23 @@ public class AuthController {
 
                 int idCompte = compteDAO.createCompte(compte);
                 if (idCompte != -1) {
+                    System.out.println("id :"+idCompte+".");
+                    System.out.println("Patient".equals(typeUtilisateur));
                     if ("Patient".equals(typeUtilisateur)) {
                         Patient patient = new Patient();
                         patient.setNom(firstName.getText());
                         patient.setPrenom(lastName.getText());
+                        patient.setCompteId(idCompte);
+                        System.out.println(patientDAO.InsertPatientSignUp(patient));
                         if (patientDAO.InsertPatientSignUp(patient)) {
-                            openPatientProfile(event);
+                            System.out.println("id avec patient : "+patient.getCompteId());
+                            // Charge l'email après l'inscription
+                            String emailPatient = compte.getEmail();
+                            openPatientProfile(event, patient, emailPatient);
                         } else {
                             showAlert("Error", "Error while creating patient.");
                         }
                     } else if ("Medecin".equals(typeUtilisateur)) {
-//                        Medecin medecin = new Medecin();
-//                        medecin.setNom(firstName.getText());
-//                        medecin.setPrenom(lastName.getText());
                         openMedecinProfile(event);
                     }
                 }
@@ -175,12 +179,13 @@ public class AuthController {
         }
     }
 
-    private void openPatientProfile(ActionEvent event) throws IOException {
+    private void openPatientProfile(ActionEvent event, Patient patient, String email) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
         Parent root = loader.load();
 
         PatientController patientController = loader.getController();
-        patientController.loadProfilePage(); // Charge directement la page profil
+        patient.setEmail(email); // Associe l'email au patient
+        patientController.ProfileSave(patient); // Charge la page profil avec le patient
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
@@ -189,6 +194,8 @@ public class AuthController {
         currentStage.setTitle("Patient Profile");
         currentStage.show();
     }
+
+
 
     private void openMedecinProfile(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/medecin/main-medecin.fxml"));

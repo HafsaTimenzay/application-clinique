@@ -15,6 +15,7 @@ public class Patient {
     private double taille;
     private double poids;
     private long compteId;
+    private String email;
 
     // Constructeurs, getters et setters
     public Patient(){}
@@ -107,5 +108,13 @@ public class Patient {
 
     public void setCompteId(long compteId) {
         this.compteId = compteId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

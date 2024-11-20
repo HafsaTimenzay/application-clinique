@@ -1,16 +1,20 @@
 package com.example.gestionclinique.controller;
 
 
+import com.example.gestionclinique.model.DAO.PatientDAO;
+import com.example.gestionclinique.model.Patient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 
@@ -21,8 +25,10 @@ public class PatientController {
 
     @FXML
     private Label pageTitle;
-    private Long compteId;
-    private BorderPane mainPane;
+    @FXML
+    private TextField firstName;
+    @FXML
+    private TextField emailField;
 
 
     /**
@@ -48,6 +54,12 @@ public class PatientController {
     public void loadProfilePage() {
         loadPage("profil-patient.fxml", "/ Profiel");
     }
+
+    public void ProfileSave(Patient patient) {
+        System.out.println(patient.getEmail());
+    }
+
+
 
 
     /**

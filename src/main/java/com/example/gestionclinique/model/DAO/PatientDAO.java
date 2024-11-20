@@ -32,25 +32,51 @@ public class PatientDAO {
     }
 
     public boolean InsertPatientSignUp(Patient patient) throws SQLException {
-        String query = "INSERT INTO Patient (nom, prenom) VALUES (?, ?)";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setString(1, patient.getNom());
-            stmt.setString(2, patient.getPrenom());
-            return stmt.executeUpdate()>0;
+        String query = "INSERT INTO Patient (nom, prenom, compte_id) VALUES (?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, patient.getNom());
+            preparedStatement.setString(2, patient.getPrenom());
+            preparedStatement.setLong(3, patient.getCompteId());
+            return preparedStatement.executeUpdate() > 0;
         }
     }
 
-    // Retrieve Patient by ID
-    public Patient getPatientById(int id) throws SQLException {
-        String query = "SELECT * FROM Patient WHERE idPatient = ?";
-        try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return mapResultSetToPatient(rs);
+
+    public Patient getPatientById(int patientId) throws SQLException {
+        String query = "SELECT p.id, p.nom, p.prenom, c.id AS compte_id, c.email " +
+                "FROM Patient p " +
+                "JOIN Compte c ON p.compte_id = c.id " +
+                "WHERE p.id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, patientId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Patient patient = new Patient();
+                patient.setIdPatient(resultSet.getInt("id"));          // ID auto-incrémenté de Patient
+                patient.setNom(resultSet.getString("nom"));     // Nom du patient
+                patient.setPrenom(resultSet.getString("prenom")); // Prénom du patient
+                patient.setCompteId(resultSet.getInt("compte_id")); // ID auto-incrémenté du Compte
+                patient.setEmail(resultSet.getString("email")); // Email associé au compte
+                return patient;
             }
         }
         return null;
+    }
+
+
+
+    public int getPatientIdByCompteId(int compteId) throws SQLException {
+        String query = "SELECT id FROM Patient WHERE id_compte = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, compteId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        }
+        return -1;
     }
 
     // Retrieve All Patients
