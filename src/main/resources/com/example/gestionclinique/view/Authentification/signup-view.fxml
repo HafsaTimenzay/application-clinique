@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="789.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionclinique.controller.AuthController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="789.0" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionclinique.controller.AuthController">
     <children>
         <AnchorPane prefHeight="494.0" prefWidth="358.0" style="-fx-background-color: #cf341e;">
             <children>
@@ -34,7 +28,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <TextField fx:id="firstName" layoutX="71.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="First name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+                <TextField  fx:id="firstName" layoutX="71.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="First name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;"/>
 
                 <Label layoutX="155.0" layoutY="53.0" text="Sign Up">
                     <font>
@@ -46,13 +40,13 @@
                 <Label layoutX="71.0" layoutY="227.0" text="Role" />
 
                 <RadioButton fx:id="medecinRadio" layoutX="140.0" layoutY="227.0" mnemonicParsing="false" text="Medecin" />
-                <RadioButton fx:id="patientRadio" layoutX="255.0" layoutY="227.0" mnemonicParsing="false" text="Patient" />
+                <RadioButton fx:id="patientRadio" layoutX="255.0" layoutY="227.0" mnemonicParsing="false" text="Patient" selected="true"/>
 
 
-                <TextField fx:id="lastName" layoutX="219.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="Last name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+                <TextField fx:id="lastName" layoutX="219.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="Last name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" text="hafsa"/>
                 <Label layoutX="71.0" layoutY="256.0" text="Email" />
-                <TextField fx:id="email" layoutX="71.0" layoutY="280.0" prefHeight="33.0" prefWidth="290.0" promptText="xxx@xx.x" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
-                <PasswordField fx:id="password" layoutX="72.0" layoutY="351.0" prefHeight="33.0" prefWidth="290.0" promptText="*******" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
+                <TextField fx:id="email" layoutX="71.0" layoutY="280.0" prefHeight="33.0" prefWidth="290.0" promptText="xxx@xx.x" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" text="hafsa@g.c"/>
+                <PasswordField fx:id="password" layoutX="72.0" layoutY="351.0" prefHeight="33.0" prefWidth="290.0" promptText="*******" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" text="code"/>
                 <Label layoutX="72.0" layoutY="323.0" text="Password" />
 
             </children>

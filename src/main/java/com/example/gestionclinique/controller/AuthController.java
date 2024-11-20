@@ -113,17 +113,23 @@ public class AuthController {
         }
     }
 
+
     @FXML
     private void handleSignupClick(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/Authentification/signup-view.fxml"));
             Parent root = loader.load();
 
+//            AuthController signupController = loader.getController();
+//            signupController.firstName.setText("hafsa");
+//            System.out.println("click called");
+//            System.out.println("firstName: " + firstName);
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
             currentStage.setTitle("Sign-Up");
             currentStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -181,12 +187,16 @@ public class AuthController {
 
     private void openPatientProfile(ActionEvent event, Patient patient, String email) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
-        Parent root = loader.load();
+        Parent root = loader.load();  // Load the FXML file and automatically inject the controller
 
+        // Retrieve the controller from the FXMLLoader
         PatientController patientController = loader.getController();
-        patient.setEmail(email); // Associe l'email au patient
-        patientController.ProfileSave(patient); // Charge la page profil avec le patient
+        //patientController.loadProfilePage();
 
+        // Call ProfileSave() to pass the patient data to the controller and print the name
+        patientController.ProfileSave(patient);
+
+        // Show the new scene
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         currentStage.setScene(scene);
@@ -202,7 +212,7 @@ public class AuthController {
         Parent root = loader.load();
 
         MedecinController medecinController = loader.getController();
-        medecinController.loadProfilePageMe(); // Charge directement la page profil médecin
+        medecinController.loadProfilePageMe();
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
