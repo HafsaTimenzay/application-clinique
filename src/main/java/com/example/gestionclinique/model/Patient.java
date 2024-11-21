@@ -1,8 +1,6 @@
 package com.example.gestionclinique.model;
 
 
-import java.sql.Date;
-
 public class Patient {
     private int idPatient;
     private String nom;
@@ -10,7 +8,7 @@ public class Patient {
     private String sexe;
     private String CIN;
     private String GSM;
-    private Date dateNaissance;
+    private String dateNaissance;
     private String adresse;
     private double taille;
     private double poids;
@@ -70,11 +68,11 @@ public class Patient {
         this.GSM = GSM;
     }
 
-    public Date getDateNaissance() {
+    public String getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(Date dateNaissance) {
+    public void setDateNaissance(String dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 

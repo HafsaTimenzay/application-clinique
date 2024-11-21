@@ -22,7 +22,7 @@ public class PatientDAO {
             stmt.setString(3, patient.getSexe());
             stmt.setString(4, patient.getCIN());
             stmt.setString(5, patient.getGSM());
-            stmt.setDate(6, new java.sql.Date(patient.getDateNaissance().getTime()));
+            stmt.setString(6, patient.getDateNaissance());
             stmt.setString(7, patient.getAdresse());
             stmt.setDouble(8, patient.getTaille());
             stmt.setDouble(9, patient.getPoids());
@@ -43,17 +43,17 @@ public class PatientDAO {
 
 
     public Patient getPatientById(int patientId) throws SQLException {
-        String query = "SELECT p.id, p.nom, p.prenom, c.id AS compte_id, c.email " +
+        String query = "SELECT p.id_patient, p.nom, p.prenom, c.id_compte AS compte_id, c.email " +
                 "FROM Patient p " +
-                "JOIN Compte c ON p.compte_id = c.id " +
-                "WHERE p.id = ?";
+                "JOIN Compte c ON p.compte_id = c.id_compte " +
+                "WHERE p.id_patient = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, patientId);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
                 Patient patient = new Patient();
-                patient.setIdPatient(resultSet.getInt("id"));          // ID auto-incrémenté de Patient
+                patient.setIdPatient(resultSet.getInt("id_patient"));          // ID auto-incrémenté de Patient
                 patient.setNom(resultSet.getString("nom"));     // Nom du patient
                 patient.setPrenom(resultSet.getString("prenom")); // Prénom du patient
                 patient.setCompteId(resultSet.getInt("compte_id")); // ID auto-incrémenté du Compte
@@ -67,17 +67,18 @@ public class PatientDAO {
 
 
     public int getPatientIdByCompteId(int compteId) throws SQLException {
-        String query = "SELECT id FROM Patient WHERE id_compte = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, compteId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                return resultSet.getInt("id");
+        // SQL query to fetch the patient ID by compteId
+        String query = "SELECT id_patient FROM Patient WHERE compte_id = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, compteId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("id_patient");
             }
+            return 0; // or handle as appropriate
         }
-        return -1;
     }
+
 
     // Retrieve All Patients
     public List<Patient> getAllPatients() throws SQLException {
@@ -94,14 +95,14 @@ public class PatientDAO {
 
     // Update Patient
     public boolean updatePatient(Patient patient) throws SQLException {
-        String query = "UPDATE Patient SET nom = ?, prenom = ?, sexe = ?, CIN = ?, GSM = ?, dateNaissance = ?, adresse = ?, taille = ?, poids = ?, compteId = ? WHERE idPatient = ?";
+        String query = "UPDATE Patient SET nom = ?, prenom = ?, sexe = ?, CIN = ?, GSM = ?, dateNaissance = ?, adress = ?, taille = ?, poids = ?, compte_id = ? WHERE id_patient = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, patient.getNom());
             stmt.setString(2, patient.getPrenom());
             stmt.setString(3, patient.getSexe());
             stmt.setString(4, patient.getCIN());
             stmt.setString(5, patient.getGSM());
-            stmt.setDate(6, new java.sql.Date(patient.getDateNaissance().getTime()));
+            stmt.setString(6, patient.getDateNaissance());
             stmt.setString(7, patient.getAdresse());
             stmt.setDouble(8, patient.getTaille());
             stmt.setDouble(9, patient.getPoids());
@@ -129,7 +130,7 @@ public class PatientDAO {
         patient.setSexe(rs.getString("sexe"));
         patient.setCIN(rs.getString("CIN"));
         patient.setGSM(rs.getString("GSM"));
-        patient.setDateNaissance(rs.getDate("dateNaissance"));
+        patient.setDateNaissance(rs.getString("dateNaissance"));
         patient.setAdresse(rs.getString("adresse"));
         patient.setTaille(rs.getDouble("taille"));
         patient.setPoids(rs.getDouble("poids"));

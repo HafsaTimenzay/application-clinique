@@ -28,7 +28,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <TextField  fx:id="firstName" layoutX="71.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="First name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;"/>
+                <TextField  fx:id="firstName" layoutX="71.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="First name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" text="hafsa"/>
 
                 <Label layoutX="155.0" layoutY="53.0" text="Sign Up">
                     <font>
@@ -43,10 +43,10 @@
                 <RadioButton fx:id="patientRadio" layoutX="255.0" layoutY="227.0" mnemonicParsing="false" text="Patient" selected="true"/>
 
 
-                <TextField fx:id="lastName" layoutX="219.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="Last name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;"/>
+                <TextField fx:id="lastName" layoutX="219.0" layoutY="180.0" prefHeight="33.0" prefWidth="137.0" promptText="Last name" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" text="timenzay"/>
                 <Label layoutX="71.0" layoutY="256.0" text="Email" />
-                <TextField fx:id="email" layoutX="71.0" layoutY="280.0" prefHeight="33.0" prefWidth="290.0" promptText="xxx@xx.x" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" />
-                <PasswordField fx:id="password" layoutX="72.0" layoutY="351.0" prefHeight="33.0" prefWidth="290.0" promptText="*******" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;"/>
+                <TextField fx:id="email" layoutX="71.0" layoutY="280.0" prefHeight="33.0" prefWidth="290.0" promptText="xxx@xx.x" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" text="htimenzay@gmail.com"/>
+                <PasswordField fx:id="password" layoutX="72.0" layoutY="351.0" prefHeight="33.0" prefWidth="290.0" promptText="*******" style="-fx-background-color: rgb(0, 0, 0, 0); -fx-background-color: #fff; -fx-border-color: #fff;" text="code"/>
                 <Label layoutX="72.0" layoutY="323.0" text="Password" />
 
             </children>

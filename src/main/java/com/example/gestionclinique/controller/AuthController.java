@@ -165,16 +165,24 @@ public class AuthController {
                         patient.setNom(firstName.getText());
                         patient.setPrenom(lastName.getText());
                         patient.setCompteId(idCompte);
-                        System.out.println(patientDAO.InsertPatientSignUp(patient));
+
+                        // Insert the patient and retrieve the generated ID
                         if (patientDAO.InsertPatientSignUp(patient)) {
-                            System.out.println("id avec patient : "+patient.getCompteId());
-                            // Charge l'email après l'inscription
+                            System.out.println("id avec patient : " + patient.getCompteId());
+
+                            // Ensure the patient object now has the correct ID (assuming the InsertPatientSignUp method handles ID generation correctly)
+                            int patientId = patientDAO.getPatientIdByCompteId((int) patient.getCompteId()); // Assuming this method exists to fetch patient ID
+
+                            patient.setIdPatient(patientId);  // Set the correct ID to the patient object
+
+                            // Load the profile page with the updated patient object
                             String emailPatient = compte.getEmail();
                             openPatientProfile(event, patient, emailPatient);
                         } else {
                             showAlert("Error", "Error while creating patient.");
                         }
-                    } else if ("Medecin".equals(typeUtilisateur)) {
+                    }
+                    else if ("Medecin".equals(typeUtilisateur)) {
                         openMedecinProfile(event);
                     }
                 }

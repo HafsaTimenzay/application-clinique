@@ -1,24 +1,30 @@
 package com.example.gestionclinique.controller;
 
-
 import com.example.gestionclinique.model.DAO.PatientDAO;
+import com.example.gestionclinique.model.DAO.RendezVousDAO;
 import com.example.gestionclinique.model.Patient;
+import com.example.gestionclinique.model.RendezVous;
+import com.example.gestionclinique.model.util.ConnectionUtil;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.IOException;
-
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class PatientController {
 
@@ -47,21 +53,83 @@ public class PatientController {
     @FXML
     private TextField cinField;
     @FXML
-    private ComboBox genderComboBox;
+    private ComboBox<String> genderComboBox;
 
+    @FXML
+    private TableView<RendezVous> tableRendezVous;
+    @FXML
+    private TableColumn<RendezVous, String> colDate;
+    @FXML
+    private TableColumn<RendezVous, String> colSpecialite;
+    @FXML
+    private TableColumn<RendezVous, String> colDoctor;
+    @FXML
+    private TableColumn<RendezVous, String> colDiagnosis;
+    @FXML
+    private TableColumn<RendezVous, Button> colAction;
 
-    /**
-     * Logout logic.
-     */
+    private Patient patientCt; // Global patient variable
+    private final PatientDAO patientDAO;
+
+    public PatientController() throws SQLException {
+        Connection connection = ConnectionUtil.getConnection();
+        this.patientDAO = new PatientDAO(connection);
+    }
+
+//    @FXML
+//    public void initialize() {
+//        // Bind columns to RendezVous properties
+//        //colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+//        colSpecialite.setCellValueFactory(cellData -> cellData.getValue().specialiteProperty());
+//        colDoctor.setCellValueFactory(cellData -> cellData.getValue().doctorProperty());
+//        colDiagnosis.setCellValueFactory(cellData -> cellData.getValue().diagnosisProperty());
+//
+//        // Add action buttons to the table
+//        colAction.setCellValueFactory(cellData -> {
+//            Button actionButton = new Button("Consult");
+//            actionButton.setOnAction(e -> navigateToConsultation(cellData.getValue()));
+//            return new SimpleObjectProperty<>(actionButton);
+//        });
+//
+//        // Load data into the table
+//        try {
+//            RendezVousDAO rendezVousDAO = new RendezVousDAO(ConnectionUtil.getConnection());
+//            List<RendezVous> rendezVousList = rendezVousDAO.getRendezVousByPatientId(1); // Replace with dynamic patient ID
+//            tableRendezVous.setItems(FXCollections.observableArrayList(rendezVousList));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        // Initialize gender ComboBox
+//        if (genderComboBox != null) {
+//            ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+//            genderComboBox.setItems(genders);
+//        }
+//    }
+
+    private void navigateToConsultation(RendezVous rendezVous) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/consultation-patient.fxml"));
+            Parent root = loader.load();
+
+            ConsultationController consultationController = loader.getController();
+            consultationController.setRendezVous(rendezVous); // Pass selected rendezvous to the next controller
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Consultation & Prescription");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void logout() {
         try {
-            // Load the login FXML file
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/Authentification/login-view.fxml"));
             Parent root = loader.load();
-
-            // Get the current stage (window) and set the new scene
-            Stage currentStage = (Stage) contentPane.getScene().getWindow(); // or pageTitle.getScene().getWindow()
+            Stage currentStage = (Stage) contentPane.getScene().getWindow();
             Scene scene = new Scene(root);
             currentStage.setScene(scene);
             currentStage.setTitle("Login");
@@ -71,72 +139,123 @@ public class PatientController {
         }
     }
 
-    /**
-     * Load the Dashboard view into the contentPane.
-     */
     @FXML
     public void loadDashboard() {
         loadPage("historique-patient.fxml", "/ Dashboard");
     }
 
-    /**
-     * Load the Appointments view into the contentPane.
-     */
     @FXML
     private void loadAppointments() {
         loadPage("rendezvous-patient.fxml", "/ Appointment");
     }
 
-    /**
-     * Load the Profile view into the contentPane.
-     */
     @FXML
-    public void loadProfilePage() {loadPage("profil-patient.fxml", "/ Profiel");}
-
-//    @FXML
-//    public void initialize() {
-//        System.out.println("firstNameField : " + firstNameField);
-//
-//        // Check if the firstNameField TextField is set, otherwise just debug it
-//        System.out.println("condition to prSave : " + (firstNameField != null));
-//
-//    }
-    private Patient patientCt;
-
+    public void loadProfilePage() {
+        loadPage("profil-patient.fxml", "/ Profile");
+    }
 
     public void ProfileSave(Patient patient) {
-        patientCt = patient;
-        if (firstNameField != null) {
-            System.out.println("Patient's name: " + patientCt.getEmail());
-
-            firstNameField.setText(patient.getNom());
-            lastNameField.setText(patient.getPrenom());
-
-            emailField.setText(patient.getEmail());
-
-        } else {
-            System.out.println("firstNameField is null in ProfileSave()");
+        if (patient == null) {
+            throw new IllegalArgumentException("Patient object cannot be null!");
         }
+
+        this.patientCt = patient; // Update global patient variable with the new patient that has the ID set
+        System.out.println("Loaded patient: " + patientCt);
+        if (firstNameField == null || genderComboBox == null) {
+            System.err.println("FXML fields are not initialized. Check your FXML file and its controller.");
+            return;
+        }
+
+        firstNameField.setText(patient.getNom());
+        genderComboBox.getSelectionModel().select(patient.getSexe());
+        // Populate UI fields
+        firstNameField.setText(patient.getNom());
+        lastNameField.setText(patient.getPrenom());
+        emailField.setText(patient.getEmail());
+        cinField.setText(patient.getCIN());
+        gsmField.setText(patient.getGSM());
+        addressField.setText(patient.getAdresse());
+        weightField.setText(String.valueOf(patient.getPoids()));
+        heightField.setText(String.valueOf(patient.getTaille()));
+//        birthDatePicker.setText(String.valueOf(patient.getDateNaissance()));
+        genderComboBox.setValue(patient.getSexe());
+    }
+
+    public void updateProfile() throws SQLException {
+        if (patientCt == null || patientCt.getIdPatient() == 0) {
+            throw new IllegalArgumentException("No patient loaded to update!");
+        }
+        System.out.println(patientCt);
+        System.out.println(patientCt.getIdPatient());
+
+        patientCt.setIdPatient(patientCt.getIdPatient());
+
+        // Validate fields
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String cin = cinField.getText();
+        String gsm = gsmField.getText();
+        String address = addressField.getText();
+        String gender = genderComboBox.getSelectionModel().getSelectedItem();
+        Double weight, height;
+
+        LocalDate date = birthDatePicker.getValue();
+
+        if (date != null) {
+            // Format the date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDate = date.format(formatter);
+
+            // Use the formatted date string
+            System.out.println("Selected date: " + formattedDate);
+        }
+        System.out.println("date : "+ date);
+
+        try {
+            weight = Double.parseDouble(weightField.getText());
+            height = Double.parseDouble(heightField.getText());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Weight and height must be numeric values!");
+        }
+
+            // Update patient object
+            patientCt.setNom(firstName);
+            patientCt.setPrenom(lastName);
+            patientCt.setCIN(cin);
+            patientCt.setGSM(gsm);
+            patientCt.setAdresse(address);
+            patientCt.setPoids(weight);
+            patientCt.setTaille(height);
+            patientCt.setDateNaissance(date.toString());
+            patientCt.setSexe(gender);
+
+            // Update in database
+            boolean isUpdated = patientDAO.updatePatient(patientCt);
+            if (isUpdated) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("the information is saved");
+                alert.showAndWait();
+            } else {
+                throw new SQLException("Failed to update patient in the database.");
+            }
+
     }
 
     public void loadPage(String fxmlFile, String title) {
         try {
-            // Ensure the path is relative to the resource folder
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/" + fxmlFile));
-
-            // Load the FXML file and get the controller instance
             Node page = loader.load();
-            PatientController patientController = loader.getController();  // Correct controller injection
+            PatientController patientController = loader.getController();
 
-            // Pass the patient data to the controller
-            System.out.println("firstNameField from controller: " + patientController.firstNameField);
-
+            // Pass the patient data
             patientController.ProfileSave(patientCt);
 
+            // Replace content
             contentPane.getChildren().clear();
             contentPane.getChildren().add(page);
 
-            // Update the page title
+            // Update title
             pageTitle.setText(title);
         } catch (IOException e) {
             e.printStackTrace();

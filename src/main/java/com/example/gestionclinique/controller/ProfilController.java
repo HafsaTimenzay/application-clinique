@@ -53,10 +53,10 @@ public class ProfilController {
     }
 
     public void updateProfile() throws SQLException {
-        Patient patient = patientDAO.getPatientById(6);
+        Patient patient = patientDAO.getPatientById(130);
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
-        Date birthDate = Date.valueOf(birthDatePicker.getValue());
+        String birthDate = String.valueOf(birthDatePicker.getValue());
         String cin = cinField.getText();
         String gsm = gsmField.getText();
         String address = addressField.getText();
