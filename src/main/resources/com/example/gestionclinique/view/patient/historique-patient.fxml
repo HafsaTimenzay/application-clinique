@@ -22,7 +22,7 @@
             <TableColumn fx:id="colSpecialite" minWidth="150.0" prefWidth="75.0" text="Departement" />
             <TableColumn fx:id="colDoctor" minWidth="150.0" prefWidth="75.0" text="Doctor" />
             <TableColumn fx:id="colDiagnosis" minWidth="150.0" prefWidth="191.3333740234375" text="Diagnostique" />
-            <TableColumn fx:id="colStatus" minWidth="130.66656494140625" prefWidth="130.66656494140625" text="Statut" />
+<!--            <TableColumn fx:id="colStatus" minWidth="130.66656494140625" prefWidth="130.66656494140625" text="Statut" />-->
             <TableColumn fx:id="colAction" minWidth="141.333251953125" prefWidth="225.33349609375" />
         </columns>
     </TableView>

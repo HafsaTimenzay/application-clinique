@@ -18,11 +18,16 @@ public class RendezVousDAO {
     public List<RendezVous> getRendezVousByPatientId(int patientId) {
         List<RendezVous> rendezVousList = new ArrayList<>();
         String query = """
-            SELECT r.date, s.titre AS specialite, m.nom AS doctor, c.diagnosis
-            FROM RendezVous r
-            JOIN Specialite s ON r.specialite_id = s.id
-            JOIN Medecin m ON r.medecin_id = m.id
-            LEFT JOIN Consultation c ON r.id = c.id_rendezvous
+            SELECT r.id AS rendezvous_id,
+                   r.date AS date_rendezvous,
+                   s.titre AS specialite,
+                   m.nom AS nom_medecin,
+                   m.prenom AS prenom_medecin,
+                   c.diagnosis AS diagnostic
+            FROM rendezvous r
+            JOIN medecin m ON r.medecin_id = m.id
+            JOIN specialite s ON m.specialite_id = s.id
+            LEFT JOIN consultation c ON r.id = c.calendrier_id
             WHERE r.patient_id = ?;
         """;
 

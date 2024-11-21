@@ -77,29 +77,33 @@ public class PatientController {
 
     @FXML
     public void initialize() {
-//         Bind columns to RendezVous properties
-//        colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
-//        colSpecialite.setCellValueFactory(cellData -> cellData.getValue().specialiteProperty());
-//        colDoctor.setCellValueFactory(cellData -> cellData.getValue().doctorProperty());
-//        colDiagnosis.setCellValueFactory(cellData -> cellData.getValue().diagnosisProperty());
-//
-//        // Add action buttons to the table
+         // Bind columns to RendezVous properties
+        if (colDate == null) {
+            System.err.println("colDate is null!");
+            return;
+        }
+        colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        colSpecialite.setCellValueFactory(cellData -> cellData.getValue().specialiteProperty());
+        colDoctor.setCellValueFactory(cellData -> cellData.getValue().doctorProperty());
+        colDiagnosis.setCellValueFactory(cellData -> cellData.getValue().diagnosisProperty());
+
+        // Populate the TableView with data
+        try {
+            RendezVousDAO rendezVousDAO = new RendezVousDAO(ConnectionUtil.getConnection());
+            List<RendezVous> rendezVousList = rendezVousDAO.getRendezVousByPatientId(1); // Replace with dynamic patient ID
+            tableRendezVous.setItems(FXCollections.observableArrayList(rendezVousList));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 //        colAction.setCellValueFactory(cellData -> {
 //            Button actionButton = new Button("Consult");
 //            actionButton.setOnAction(e -> navigateToConsultation(cellData.getValue()));
 //            return new SimpleObjectProperty<>(actionButton);
 //        });
-//
-//        // Load data into the table
-//        try {
-//            RendezVousDAO rendezVousDAO = new RendezVousDAO(ConnectionUtil.getConnection());
-//            List<RendezVous> rendezVousList = rendezVousDAO.getRendezVousByPatientId(1); // Replace with dynamic patient ID
-//            tableRendezVous.setItems(FXCollections.observableArrayList(rendezVousList));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
-        // Initialize gender ComboBox
+
+        //  Initialize gender ComboBox
         if (genderComboBox != null) {
             ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
             genderComboBox.setItems(genders);
@@ -247,6 +251,8 @@ public class PatientController {
             }
 
     }
+
+
 
     public void loadPage(String fxmlFile, String title) {
         try {
