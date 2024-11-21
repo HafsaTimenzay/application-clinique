@@ -74,29 +74,43 @@ public class AuthController {
     @FXML
     private void handleLoginClick(ActionEvent event) {
         try {
-            if (compteDAO.authenticate(emailField.getText(), passwordField.getText())) {
-                String userType = compteDAO.getUserType(emailField.getText(), passwordField.getText());
+            String email = emailField.getText();
+            String password = passwordField.getText();
+
+            if (compteDAO.authenticate(email, password)) {
+                String userType = compteDAO.getUserType(email, password);
                 FXMLLoader loader;
                 Parent root;
 
                 if ("Patient".equals(userType)) {
+                    // Fetch the patient object
+                    Patient patient = patientDAO.getPatientByEmail(email); // New method to fetch Patient by email
+
+                    if (patient == null) {
+                        throw new IllegalArgumentException("Patient object cannot be null!");
+                    }
+
                     loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/main-patient.fxml"));
                     root = loader.load();
 
+                    // Pass the patient object to the controller
                     PatientController patientController = loader.getController();
-                    patientController.loadDashboard(); // Charge le tableau de bord
+                    patientController.ProfileSave(patient); // Load patient data
+                    patientController.loadDashboard();
+
                 } else if ("Medecin".equals(userType)) {
                     loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/medecin/main-medecin.fxml"));
                     root = loader.load();
 
                     MedecinController medecinController = loader.getController();
-                    medecinController.loadDashboard(); // Charge le tableau de bord
+                    medecinController.loadDashboard();
+
                 } else {
                     showAlert("Error", "Unknown user type.");
                     return;
                 }
 
-                // Affiche la nouvelle scène
+                // Show the new scene
                 Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(root);
                 currentStage.setScene(scene);

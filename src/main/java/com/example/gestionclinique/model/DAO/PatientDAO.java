@@ -135,4 +135,30 @@ public class PatientDAO {
         patient.setCompteId(rs.getLong("compteId"));
         return patient;
     }
+
+    public Patient getPatientByEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM Patient p JOIN Compte c ON p.compte_id = c.id_compte WHERE c.email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Patient patient = new Patient();
+                patient.setIdPatient(rs.getInt("id_patient"));
+                patient.setNom(rs.getString("nom"));
+                patient.setPrenom(rs.getString("prenom"));
+                patient.setEmail(rs.getString("email"));
+                patient.setCIN(rs.getString("CIN"));
+                patient.setGSM(rs.getString("GSM"));
+                patient.setAdresse(rs.getString("adress"));
+                patient.setPoids(rs.getDouble("poids"));
+                patient.setTaille(rs.getDouble("Taille"));
+                patient.setDateNaissance(rs.getString("DateNaissance"));
+                patient.setSexe(rs.getString("sexe"));
+                patient.setCompteId(rs.getInt("compte_id"));
+                return patient;
+            }
+            return null; // No patient found
+        }
+    }
+
 }

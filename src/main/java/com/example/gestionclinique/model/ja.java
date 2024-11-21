@@ -1,220 +1,222 @@
-//package com.example.myinteljquiz.controller.Enseignant;
-//
-//import com.example.myinteljquiz.HelloApplication;
-//import com.example.myinteljquiz.model.DbConnct;
-//import com.example.myinteljquiz.model.Quiz;
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//import javafx.fxml.FXML;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
-//import javafx.scene.control.*;
-//import javafx.stage.Stage;
-//import javafx.event.ActionEvent;
-//
-//import java.io.IOException;
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//
-//public class EnseignantController {
-//    @FXML private Button log_out_Btn;
-//    @FXML private Button create_Btn;
-//    @FXML private Button update_Btn;
-//    @FXML private Button delete_Btn;
-//    @FXML private Button cancelButton;
-//    @FXML private Button updateButton;
-//    @FXML private TableView<Quiz> table_Enseignant;
-//    @FXML private TableColumn<Quiz, Integer> id_column;
-//    @FXML private TableColumn<Quiz, String> name_column;
-//    @FXML private TableColumn<Quiz, String> descript_Btn;
-//    @FXML private TableColumn<Quiz, String> time_column;
-//    @FXML
-//    private TextField quizNameField;
-//    @FXML
-//    private TextArea quizDescriptionArea;
-//    @FXML
-//    private TextField quizTimeField;
-//    private int idQuiz;
-//
-//    // ObservableList to hold quiz data
-//    private ObservableList<Quiz> quizList = FXCollections.observableArrayList();
-//
-//    @FXML
-//    public void initialize() {
-//        // Set up the TableView columns
-//        id_column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getId()).asObject());
-//        name_column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName()));
-//        descript_Btn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDescription()));
-//        time_column.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTime()));
-//
-//        // Load quiz data from the database
-//        loadQuizData();
-//        table_Enseignant.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-//            if (newValue != null) {
-//                idQuiz = newValue.getId(); // Make sure getId() returns the quiz ID
-//            }
-//        });
-//    }
-//
-//    // Method to load quiz data from the database
-//    private void loadQuizData() {
-//        String querySelect = "SELECT * FROM quiz";
-//
-//        try (Connection connection = DbConnct.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(querySelect);
-//             ResultSet resultSet = preparedStatement.executeQuery()) {
-//
-//            while (resultSet.next()) {
-//                int id = resultSet.getInt("id_quiz");
-//                String name = resultSet.getString("titre_quiz");
-//                String description = resultSet.getString("description");
-//                String time = resultSet.getString("duree");
-//
-//                // Add the quiz to the list
-//                quizList.add(new Quiz(id, name, description, time));
-//            }
-//
-//            // Set the list to the TableView
-//            table_Enseignant.setItems(quizList);
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void LogOutOnAction(ActionEvent event) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("LoginView.fxml"));
-//        Parent root = fxmlLoader.load();
-//        Stage stage = (Stage) log_out_Btn.getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
-//
-//    public void CreateOnAction(ActionEvent event) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/myinteljquiz/view/creationQuiz.fxml"));
-//        Parent root = fxmlLoader.load();
-//        Stage stage = (Stage) create_Btn.getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//        stage.show();
-//    }
-//
-//    public void setQuizId(int idQuiz) {
-//        this.idQuiz = idQuiz;
-//    }
-//
-//    public void DeleteOnAction(ActionEvent event) {
-//        if (idQuiz == 0) { // Check if idQuiz is valid
-//            System.out.println("No quiz selected for deletion.");
-//            return;
-//        }
-//
-//        String query = "DELETE FROM quiz WHERE id_quiz = ?";
-//        System.out.println("Attempting to delete quiz with id: " + idQuiz); // Debugging line
-//
-//        try (Connection connection = DbConnct.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//            preparedStatement.setInt(1, idQuiz);
-//
-//            int i = preparedStatement.executeUpdate();
-//            if (i > 0) {
-//                System.out.println("Quiz deleted successfully");
-//                // Refresh the TableView after deletion
-//                quizList.clear();
-//                loadQuizData();
-//            } else {
-//                System.out.println("Quiz could not be deleted");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @FXML
-//    public void UpdateOnAction(ActionEvent event) throws IOException {
-//        Quiz selectedQuiz = table_Enseignant.getSelectionModel().getSelectedItem();
-//        if (selectedQuiz == null) {
-//            showAlert(Alert.AlertType.WARNING, "Selection Error", "No quiz selected for updating.");
-//            return;
-//        }
-//
-//        // Pass the selected quiz ID to the new view
-//        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/myinteljquiz/view/updateQuiz.fxml"));
-//        Parent root = fxmlLoader.load();
-//        Stage stage = (Stage) update_Btn.getScene().getWindow();
-//        stage.setScene(new Scene(root));
-//
-//        UpdateQuizController updateQuizController = fxmlLoader.getController();
-//        updateQuizController.initialize(selectedQuiz); // Pass selected quiz to the controller
-//
-//        stage.show();
-//    }
-//
-//
-//
-//
-//
-//    @FXML
-//    public void onUpdateButtonAction(ActionEvent event) {
-//        // Get the updated values from the text fields
-//        String newQuizName = quizNameField.getText();
-//        String newQuizDescription = quizDescriptionArea.getText();
-//        String newQuizTime = quizTimeField.getText();
-//
-//        // Validate the input fields (ensure no field is empty)
-//        if (newQuizName.trim().isEmpty() || newQuizDescription.trim().isEmpty() || newQuizTime.trim().isEmpty()) {
-//            showAlert(Alert.AlertType.WARNING, "Validation Error", "All fields must be filled out.");
-//            return;
-//        }
-//
-//        // Prepare the SQL query to update the quiz in the database
-//        String query = "UPDATE quiz SET titre_quiz = ?, description = ?, duree = ? WHERE id_quiz = ?";
-//
-//        try (Connection connection = DbConnct.getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-//
-//            // Set the parameters for the query
-//            preparedStatement.setString(1, newQuizName);
-//            preparedStatement.setString(2, newQuizDescription);
-//            preparedStatement.setString(3, newQuizTime);
-//            preparedStatement.setInt(4, idQuiz);  // The ID of the selected quiz
-//
-//            // Execute the update query
-//            int i = preparedStatement.executeUpdate();
-//            if (i > 0) {
-//                // Show success message
-//                showAlert(Alert.AlertType.INFORMATION, "Success", "Quiz updated successfully");
-//
-//                // Update the quiz object in the table view
-//                for (Quiz quiz : quizList) {
-//                    if (quiz.getId() == idQuiz) {
-//                        quiz.setName(newQuizName);
-//                        quiz.setDescription(newQuizDescription);
-//                        quiz.setTime(newQuizTime);
-//                        break;
-//                    }
-//                }
-//
-//                // Refresh the table to display updated quiz data
-//                table_Enseignant.refresh();
-//            } else {
-//                // Show error if the update fails
-//                showAlert(Alert.AlertType.ERROR, "Update Failed", "Failed to update the quiz.");
-//            }
-//        } catch (SQLException ex) {
-//            ex.printStackTrace();
-//            showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while updating the quiz.");
-//        }
-//    }
-//    private void showAlert(Alert.AlertType alertType, String title, String message) {
-//        Alert alert = new Alert(alertType);
-//        alert.setTitle(title);
-//        alert.setContentText(message);
-//        alert.showAndWait();
-//}
-//
-//
-//
-//}
+package com.example.gestionclinique.controller;
+
+import com.example.gestionclinique.model.DAO.PatientDAO;
+import com.example.gestionclinique.model.DAO.RendezVousDAO;
+import com.example.gestionclinique.model.Patient;
+import com.example.gestionclinique.model.RendezVous;
+import com.example.gestionclinique.model.util.ConnectionUtil;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
+public class PatientController {
+
+    @FXML
+    private Pane contentPane;
+
+    @FXML
+    private Label pageTitle;
+
+    @FXML
+    private TextField firstNameField;
+    @FXML
+    private TextField lastNameField;
+    @FXML
+    private DatePicker birthDatePicker;
+    @FXML
+    private TextField gsmField;
+    @FXML
+    private TextField addressField;
+    @FXML
+    private TextField weightField;
+    @FXML
+    private TextField heightField;
+    @FXML
+    private TextField cinField;
+    @FXML
+    private ComboBox<String> genderComboBox;
+
+    @FXML
+    private TableView<RendezVous> tableRendezVous;
+    @FXML
+    private TableColumn<RendezVous, String> colDate;
+    @FXML
+    private TableColumn<RendezVous, String> colSpecialite;
+    @FXML
+    private TableColumn<RendezVous, String> colDoctor;
+    @FXML
+    private TableColumn<RendezVous, String> colDiagnosis;
+    @FXML
+    private TableColumn<RendezVous, Button> colAction;
+
+    private Patient patientCt; // Global patient variable
+    private final PatientDAO patientDAO;
+
+    public PatientController() throws SQLException {
+        Connection connection = ConnectionUtil.getConnection();
+        this.patientDAO = new PatientDAO(connection);
+    }
+
+    @FXML
+    public void initialize() {
+         // Bind columns to RendezVous properties
+        colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        colSpecialite.setCellValueFactory(cellData -> cellData.getValue().specialiteProperty());
+        colDoctor.setCellValueFactory(cellData -> cellData.getValue().doctorProperty());
+        colDiagnosis.setCellValueFactory(cellData -> cellData.getValue().diagnosisProperty());
+
+        // Add action buttons to the table
+        colAction.setCellValueFactory(cellData -> {
+            Button actionButton = new Button("Consult");
+            actionButton.setOnAction(e -> navigateToConsultation(cellData.getValue()));
+            return new SimpleObjectProperty<>(actionButton);
+        });
+
+        // Load data into the table
+        try {
+            RendezVousDAO rendezVousDAO = new RendezVousDAO(ConnectionUtil.getConnection());
+            List<RendezVous> rendezVousList = rendezVousDAO.getRendezVousByPatientId(1); // Replace with dynamic patient ID
+            tableRendezVous.setItems(FXCollections.observableArrayList(rendezVousList));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+         // Initialize gender ComboBox
+        if (genderComboBox != null) {
+            ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+            genderComboBox.setItems(genders);
+        }
+    }
+
+    private void navigateToConsultation(RendezVous rendezVous) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/patient/consultation-patient.fxml"));
+            Parent root = loader.load();
+
+            ConsultationController consultationController = loader.getController();
+            consultationController.setRendezVous(rendezVous); // Pass selected rendezvous to the next controller
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Consultation & Prescription");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ProfileSave(Patient patient) {
+        if (patient == null) {
+            throw new IllegalArgumentException("Patient object cannot be null!");
+        }
+
+        this.patientCt = patient; // Update global patient variable with the new patient that has the ID set
+        System.out.println("Loaded patient: " + patientCt);
+        if (firstNameField == null || genderComboBox == null) {
+            System.err.println("FXML fields are not initialized. Check your FXML file and its controller.");
+            return;
+        }
+
+        String dateFromDb = patient.getDateNaissance(); // Récupérer la date depuis l'objet Patient
+        if (dateFromDb != null && !dateFromDb.isEmpty()) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate localDate = LocalDate.parse(dateFromDb, formatter);
+                birthDatePicker.setValue(localDate); // Affecter la valeur au DatePicker
+            } catch (DateTimeParseException e) {
+                System.err.println("Invalid date format in database: " + dateFromDb);
+            }
+        }
+
+        genderComboBox.getSelectionModel().select(patient.getSexe());
+        firstNameField.setText(patient.getNom());
+        lastNameField.setText(patient.getPrenom());
+        cinField.setText(patient.getCIN());
+        gsmField.setText(patient.getGSM());
+        addressField.setText(patient.getAdresse());
+        weightField.setText(String.valueOf(patient.getPoids()));
+        heightField.setText(String.valueOf(patient.getTaille()));
+
+    }
+
+    public void updateProfile() throws SQLException {
+        if (patientCt == null || patientCt.getIdPatient() == 0) {
+            throw new IllegalArgumentException("No patient loaded to update!");
+        }
+        System.out.println(patientCt);
+        System.out.println(patientCt.getIdPatient());
+
+        patientCt.setIdPatient(patientCt.getIdPatient());
+
+        // Validate fields
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String cin = cinField.getText();
+        String gsm = gsmField.getText();
+        String address = addressField.getText();
+        String gender = genderComboBox.getSelectionModel().getSelectedItem();
+        Double weight, height;
+
+        LocalDate date = birthDatePicker.getValue();
+
+        if (date != null) {
+            // Format the date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String formattedDate = date.format(formatter);
+
+            // Use the formatted date string
+            System.out.println("Selected date: " + formattedDate);
+        }
+        System.out.println("date : "+ date);
+
+        try {
+            weight = Double.parseDouble(weightField.getText());
+            height = Double.parseDouble(heightField.getText());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Weight and height must be numeric values!");
+        }
+
+        // Update patient object
+        patientCt.setNom(firstName);
+        patientCt.setPrenom(lastName);
+        patientCt.setCIN(cin);
+        patientCt.setGSM(gsm);
+        patientCt.setAdresse(address);
+        patientCt.setPoids(weight);
+        patientCt.setTaille(height);
+        patientCt.setDateNaissance(date.toString());
+        patientCt.setSexe(gender);
+
+        // Update in database
+        boolean isUpdated = patientDAO.updatePatient(patientCt);
+        if (isUpdated) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("the information is saved");
+            alert.showAndWait();
+        } else {
+            throw new SQLException("Failed to update patient in the database.");
+        }
+
+    }
+
+
+}

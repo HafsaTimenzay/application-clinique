@@ -104,4 +104,24 @@ public class CompteDAO {
             stmt.executeUpdate();
         }
     }
+
+    public Compte getCompteByEmail(String email) throws SQLException {
+        String query = "SELECT * FROM Compte WHERE email = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                Compte compte = new Compte();
+                compte.setIdCompte(rs.getInt("idCompte"));
+                compte.setEmail(rs.getString("email"));
+                compte.setFirstName(rs.getString("firstName"));
+                compte.setLastName(rs.getString("lastName"));
+                compte.setPassword(rs.getString("password"));
+                compte.setTypeUtilisateur(rs.getString("typeUtilisateur"));
+                return compte;
+            }
+            return null; // No account found
+        }
+    }
+
 }

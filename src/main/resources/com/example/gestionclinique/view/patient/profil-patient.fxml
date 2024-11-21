@@ -50,14 +50,6 @@
         </font>
     </Label>
     <ComboBox fx:id="genderComboBox" layoutX="144.0" layoutY="178.0" prefHeight="40.0" prefWidth="157.0" promptText="Select gender" />
-    <!-- Email -->
-    <Label layoutX="44.0" layoutY="248.0" text="Email">
-        <font>
-            <Font size="17.0" />
-        </font>
-    </Label>
-    <TextField fx:id="emailField" layoutX="144.0" layoutY="248.0" prefHeight="40.0" prefWidth="280.0" promptText="Enter your email" />
-
     <!-- GSM -->
     <Label layoutX="454.0" layoutY="252.0" text="GSM">
         <font>

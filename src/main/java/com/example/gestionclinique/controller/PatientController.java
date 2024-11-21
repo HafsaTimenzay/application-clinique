@@ -24,6 +24,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class PatientController {
@@ -42,8 +43,6 @@ public class PatientController {
     private DatePicker birthDatePicker;
     @FXML
     private TextField gsmField;
-    @FXML
-    private TextField emailField;
     @FXML
     private TextField addressField;
     @FXML
@@ -78,8 +77,8 @@ public class PatientController {
 
     @FXML
     public void initialize() {
-        // Bind columns to RendezVous properties
-        //colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+//         Bind columns to RendezVous properties
+//        colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
 //        colSpecialite.setCellValueFactory(cellData -> cellData.getValue().specialiteProperty());
 //        colDoctor.setCellValueFactory(cellData -> cellData.getValue().doctorProperty());
 //        colDiagnosis.setCellValueFactory(cellData -> cellData.getValue().diagnosisProperty());
@@ -166,19 +165,26 @@ public class PatientController {
             return;
         }
 
-//        genderComboBox.getSelectionModel().select(patient.getSexe());
-        // Populate UI fields
+        String dateFromDb = patient.getDateNaissance(); // Récupérer la date depuis l'objet Patient
+        if (dateFromDb != null && !dateFromDb.isEmpty()) {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate localDate = LocalDate.parse(dateFromDb, formatter);
+                birthDatePicker.setValue(localDate); // Affecter la valeur au DatePicker
+            } catch (DateTimeParseException e) {
+                System.err.println("Invalid date format in database: " + dateFromDb);
+            }
+        }
+
+        genderComboBox.getSelectionModel().select(patient.getSexe());
         firstNameField.setText(patient.getNom());
         lastNameField.setText(patient.getPrenom());
-        System.out.println(patient.getEmail());
-        emailField.setText(patient.getEmail());
-//        cinField.setText(patient.getCIN());
-//        gsmField.setText(patient.getGSM());
-//        addressField.setText(patient.getAdresse());
-//        weightField.setText(String.valueOf(patient.getPoids()));
-//        heightField.setText(String.valueOf(patient.getTaille()));
-////        birthDatePicker.setText(String.valueOf(patient.getDateNaissance()));
-//        genderComboBox.setValue(patient.getSexe());
+        cinField.setText(patient.getCIN());
+        gsmField.setText(patient.getGSM());
+        addressField.setText(patient.getAdresse());
+        weightField.setText(String.valueOf(patient.getPoids()));
+        heightField.setText(String.valueOf(patient.getTaille()));
+
     }
 
     public void updateProfile() throws SQLException {
