@@ -22,7 +22,7 @@
          <Font size="17.0" />
       </font>
    </Label>
-   <ComboBox layoutX="55.0" layoutY="121.0" prefHeight="38.0" prefWidth="350.0" promptText="Cardiology Department" />
+   <ComboBox fx:id="specialites" layoutX="55.0" layoutY="121.0" prefHeight="38.0" prefWidth="350.0" promptText="Cardiology Department" />
 
    <!-- Doctor -->
    <Label layoutX="477.0" layoutY="84.0" text="Available Doctors">
@@ -30,7 +30,7 @@
          <Font size="17.0" />
       </font>
    </Label>
-   <ComboBox layoutX="471.0" layoutY="120.0" prefHeight="38.0" prefWidth="350.0" promptText="Dr. Hassan Sakine" />
+   <ComboBox fx:id="doctors" layoutX="471.0" layoutY="120.0" prefHeight="38.0" prefWidth="350.0" promptText="Dr. Hassan Sakine" />
 
    <!-- Appointment For -->
    <Label layoutX="63.0" layoutY="183.0" text="Appointment For">
@@ -38,7 +38,7 @@
          <Font size="17.0" />
       </font>
    </Label>
-   <TextField layoutX="59.0" layoutY="227.0" prefHeight="40.0" prefWidth="759.0" promptText="Enter Appointment Details" />
+   <TextField fx:id="digonist" layoutX="59.0" layoutY="227.0" prefHeight="40.0" prefWidth="759.0" promptText="Enter Appointment Details" />
 
    <!-- Date -->
    <Label layoutX="70.0" layoutY="290.0" text="Select Date">
@@ -48,12 +48,12 @@
    </Label>
 
    <!-- ToggleButton for Days -->
-   <ToggleButton layoutX="58.0" layoutY="328.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Monday" />
-   <ToggleButton layoutX="181.0" layoutY="328.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Tuesday" />
-   <ToggleButton layoutX="304.0" layoutY="328.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Wednesday" />
-   <ToggleButton layoutX="58.0" layoutY="381.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Thursday" />
-   <ToggleButton layoutX="181.0" layoutY="381.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Friday" />
-   <ToggleButton layoutX="304.0" layoutY="381.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Saturday" />
+   <ToggleButton layoutX="58.0" layoutY="328.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Monday" fx:id="Monday"/>
+   <ToggleButton layoutX="181.0" layoutY="328.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Tuesday" fx:id="Tuesday"/>
+   <ToggleButton layoutX="304.0" layoutY="328.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Wednesday" fx:id="Wednesday"/>
+   <ToggleButton layoutX="58.0" layoutY="381.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Thursday" fx:id="Thursday"/>
+   <ToggleButton layoutX="181.0" layoutY="381.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Friday" fx:id="Friday"/>
+   <ToggleButton layoutX="304.0" layoutY="381.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="100.0" styleClass="day" text="Saturday" fx:id="Saturday"/>
 
    <!-- Time -->
    <Label layoutX="491.0" layoutY="291.0" text="Select Time">
@@ -61,13 +61,13 @@
          <Font size="17.0" />
       </font>
    </Label>
-   <ToggleButton layoutX="488.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="09:00 am" />
-   <ToggleButton layoutX="590.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="10:00 am" />
-   <ToggleButton layoutX="694.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="11:00 am" />
-   <ToggleButton layoutX="801.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="12:00 pm" />
-   <ToggleButton layoutX="489.0" layoutY="384.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="01:00 pm" />
-   <ToggleButton layoutX="590.0" layoutY="384.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="02:00 pm" />
-   <ToggleButton layoutX="695.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="03:00 pm" />
-   <ToggleButton layoutX="801.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="04:00 pm" />
+   <ToggleButton layoutX="488.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="09:00 am" fx:id="9"/>
+   <ToggleButton layoutX="590.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="10:00 am" fx:id="10"/>
+   <ToggleButton layoutX="694.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="11:00 am" fx:id="11"/>
+   <ToggleButton layoutX="801.0" layoutY="332.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="12:00 pm" fx:id="12"/>
+   <ToggleButton layoutX="489.0" layoutY="384.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="01:00 pm" fx:id="1"/>
+   <ToggleButton layoutX="590.0" layoutY="384.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="02:00 pm" fx:id="2"/>
+   <ToggleButton layoutX="695.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="03:00 pm" fx:id="3"/>
+   <ToggleButton layoutX="801.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="04:00 pm" fx:id="4"/>
    <Button fx:id="saveButton" layoutX="770.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" />
 </AnchorPane>
