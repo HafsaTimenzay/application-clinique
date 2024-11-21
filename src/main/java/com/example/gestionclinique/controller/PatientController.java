@@ -76,10 +76,10 @@ public class PatientController {
         this.patientDAO = new PatientDAO(connection);
     }
 
-//    @FXML
-//    public void initialize() {
-//        // Bind columns to RendezVous properties
-//        //colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+    @FXML
+    public void initialize() {
+        // Bind columns to RendezVous properties
+        //colDate.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
 //        colSpecialite.setCellValueFactory(cellData -> cellData.getValue().specialiteProperty());
 //        colDoctor.setCellValueFactory(cellData -> cellData.getValue().doctorProperty());
 //        colDiagnosis.setCellValueFactory(cellData -> cellData.getValue().diagnosisProperty());
@@ -99,13 +99,13 @@ public class PatientController {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
-//
-//        // Initialize gender ComboBox
-//        if (genderComboBox != null) {
-//            ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
-//            genderComboBox.setItems(genders);
-//        }
-//    }
+
+        // Initialize gender ComboBox
+        if (genderComboBox != null) {
+            ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
+            genderComboBox.setItems(genders);
+        }
+    }
 
     private void navigateToConsultation(RendezVous rendezVous) {
         try {
@@ -166,19 +166,19 @@ public class PatientController {
             return;
         }
 
-        firstNameField.setText(patient.getNom());
-        genderComboBox.getSelectionModel().select(patient.getSexe());
+//        genderComboBox.getSelectionModel().select(patient.getSexe());
         // Populate UI fields
         firstNameField.setText(patient.getNom());
         lastNameField.setText(patient.getPrenom());
+        System.out.println(patient.getEmail());
         emailField.setText(patient.getEmail());
-        cinField.setText(patient.getCIN());
-        gsmField.setText(patient.getGSM());
-        addressField.setText(patient.getAdresse());
-        weightField.setText(String.valueOf(patient.getPoids()));
-        heightField.setText(String.valueOf(patient.getTaille()));
-//        birthDatePicker.setText(String.valueOf(patient.getDateNaissance()));
-        genderComboBox.setValue(patient.getSexe());
+//        cinField.setText(patient.getCIN());
+//        gsmField.setText(patient.getGSM());
+//        addressField.setText(patient.getAdresse());
+//        weightField.setText(String.valueOf(patient.getPoids()));
+//        heightField.setText(String.valueOf(patient.getTaille()));
+////        birthDatePicker.setText(String.valueOf(patient.getDateNaissance()));
+//        genderComboBox.setValue(patient.getSexe());
     }
 
     public void updateProfile() throws SQLException {

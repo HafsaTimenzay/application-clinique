@@ -42,28 +42,26 @@ public class PatientDAO {
     }
 
 
-    public Patient getPatientById(int patientId) throws SQLException {
+    public Patient getPatientById(int idPatient) throws SQLException {
         String query = "SELECT p.id_patient, p.nom, p.prenom, c.id_compte AS compte_id, c.email " +
                 "FROM Patient p " +
                 "JOIN Compte c ON p.compte_id = c.id_compte " +
                 "WHERE p.id_patient = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, patientId);
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, idPatient);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
                 Patient patient = new Patient();
-                patient.setIdPatient(resultSet.getInt("id_patient"));          // ID auto-incrémenté de Patient
-                patient.setNom(resultSet.getString("nom"));     // Nom du patient
-                patient.setPrenom(resultSet.getString("prenom")); // Prénom du patient
-                patient.setCompteId(resultSet.getInt("compte_id")); // ID auto-incrémenté du Compte
-                patient.setEmail(resultSet.getString("email")); // Email associé au compte
+                patient.setIdPatient(rs.getInt("id_patient"));
+                patient.setNom(rs.getString("nom"));
+                patient.setPrenom(rs.getString("prenom"));
+                patient.setCompteId(rs.getInt("compte_id"));
+                patient.setEmail(rs.getString("email")); // Map the email correctly
                 return patient;
             }
         }
-        return null;
+        return null; // Handle cases where no patient is found
     }
-
 
 
     public int getPatientIdByCompteId(int compteId) throws SQLException {
