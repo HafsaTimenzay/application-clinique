@@ -66,6 +66,8 @@ public class PatientController {
     private TableColumn<RendezVous, String> colDiagnosis;
     @FXML
     private TableColumn<RendezVous, Button> colAction;
+    @FXML
+    private ComboBox<String> specialites;
 
     private Patient patientCt; // Global patient variable
     private final PatientDAO patientDAO;
@@ -107,6 +109,22 @@ public class PatientController {
         if (genderComboBox != null) {
             ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
             genderComboBox.setItems(genders);
+        }
+
+        if (specialites != null) {
+            ObservableList<String> specialties = FXCollections.observableArrayList(
+                    "Cardiology",
+                    "Neurology",
+                    "Orthopedics",
+                    "Pediatrics",
+                    "Dermatology",
+                    "Oncology",
+                    "Gynecology",
+                    "Psychiatry",
+                    "Endocrinology",
+                    "Gastroenterology"
+            );
+            specialites.setItems(specialties);
         }
     }
 

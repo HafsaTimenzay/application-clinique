@@ -2,6 +2,7 @@ package com.example.gestionclinique.controller;
 
 import com.example.gestionclinique.model.Compte;
 import com.example.gestionclinique.model.DAO.CompteDAO;
+import com.example.gestionclinique.model.DAO.MedecinDAO;
 import com.example.gestionclinique.model.Medecin;
 import com.example.gestionclinique.model.Patient;
 import com.example.gestionclinique.model.DAO.PatientDAO;
@@ -40,12 +41,14 @@ public class AuthController {
 
     private CompteDAO compteDAO;
     private PatientDAO patientDAO;
+    private MedecinDAO medecinDAO;
 
     public AuthController() {
         try {
             Connection connection = ConnectionUtil.getConnection();
             compteDAO = new CompteDAO(connection);
             patientDAO = new PatientDAO(connection);
+            medecinDAO = new MedecinDAO(connection);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,10 +102,19 @@ public class AuthController {
                     patientController.loadDashboard();
 
                 } else if ("Medecin".equals(userType)) {
+
+                    Medecin medecin = medecinDAO.getMedecinByEmail(email); // New method to fetch Patient by email
+
+                    if (medecin == null) {
+                        throw new IllegalArgumentException("medecin object cannot be null!");
+                    }
+
                     loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/medecin/main-medecin.fxml"));
                     root = loader.load();
 
+                    // Pass the patient object to the controller
                     MedecinController medecinController = loader.getController();
+                    medecinController.ProfileSave(medecin); // Load patient data
                     medecinController.loadDashboard();
 
                 } else {
@@ -197,7 +209,26 @@ public class AuthController {
                         }
                     }
                     else if ("Medecin".equals(typeUtilisateur)) {
-                        openMedecinProfile(event);
+                        Medecin medecin = new Medecin();
+                        medecin.setNom(firstName.getText());
+                        medecin.setPrenom(lastName.getText());
+                        medecin.setCompteId(idCompte);
+
+                        // Insert the medecin and retrieve the generated ID
+                        if (medecinDAO.InsertMedecinSignUp(medecin)) {
+                            System.out.println("id avec medecin : " + medecin.getCompteId());
+
+                            // Ensure the medecin object now has the correct ID (assuming the InsertmedecinSignUp method handles ID generation correctly)
+                            int medecinId = medecinDAO.getMedecinIdByCompteId((int) medecin.getCompteId()); // Assuming this method exists to fetch medecin ID
+
+                            medecin.setIdMedecin(medecinId);  // Set the correct ID to the medecin object
+
+                            // Load the profile page with the updated medecin object
+                            String emailmedecin = compte.getEmail();
+                            openMedecinProfile(event, medecin, emailmedecin);
+                        } else {
+                            showAlert("Error", "Error while creating medecin.");
+                        }
                     }
                 }
             } catch (SQLException | IOException e) {
@@ -230,12 +261,18 @@ public class AuthController {
 
 
 
-    private void openMedecinProfile(ActionEvent event) throws IOException {
+    private void openMedecinProfile(ActionEvent event, Medecin medecin, String email) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/medecin/main-medecin.fxml"));
         Parent root = loader.load();
 
         MedecinController medecinController = loader.getController();
+        medecinController.ProfileSave(medecin);
         medecinController.loadProfilePageMe();
+
+
+        // Call ProfileSave() to pass the patient data to the controller and print the name
+
+
 
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);

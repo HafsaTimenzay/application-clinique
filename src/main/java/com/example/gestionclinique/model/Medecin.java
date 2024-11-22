@@ -8,19 +8,14 @@ public class Medecin {
     private String nom;
     private String prenom;
     private String adresse;
-    private Date dateNaissance;
+    private String dateNaissance;
     private int specialiteId;
     private long compteId;
+    private String email;
 
 
-    public Medecin(long idMedecin, String nom, String prenom, String adresse, Date dateNaissance, int specialiteId, long compteId) {
-        this.idMedecin = idMedecin;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.adresse = adresse;
-        this.dateNaissance = dateNaissance;
-        this.specialiteId = specialiteId;
-        this.compteId = compteId;
+    public Medecin() {
+
     }
 
     public long getIdMedecin() {
@@ -55,11 +50,11 @@ public class Medecin {
         this.adresse = adresse;
     }
 
-    public Date getDateNaissance() {
+    public String getDateNaissance() {
         return dateNaissance;
     }
 
-    public void setDateNaissance(Date dateNaissance) {
+    public void setDateNaissance(String dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
 
@@ -78,4 +73,14 @@ public class Medecin {
     public void setCompteId(long compteId) {
         this.compteId = compteId;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+
 }
