@@ -265,15 +265,17 @@ public class AuthController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/gestionclinique/view/medecin/main-medecin.fxml"));
         Parent root = loader.load();
 
+        // Ensure that the controller is properly set by FXMLLoader
         MedecinController medecinController = loader.getController();
-        medecinController.ProfileSave(medecin);
-        medecinController.loadProfilePageMe();
 
+        if (medecinController != null) {
+            medecinController.ProfileSave(medecin);  // Pass the Medecin object to the controller
+            medecinController.loadProfilePageMe();   // Load the profile page for the medecin
+        } else {
+            System.err.println("MedecinController is null!");
+        }
 
-        // Call ProfileSave() to pass the patient data to the controller and print the name
-
-
-
+        // Set up the new scene and window
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root);
         currentStage.setScene(scene);
@@ -281,4 +283,5 @@ public class AuthController {
         currentStage.setTitle("Medecin Profile");
         currentStage.show();
     }
+
 }

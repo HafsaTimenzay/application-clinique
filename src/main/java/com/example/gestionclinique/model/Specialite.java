@@ -26,4 +26,9 @@ public class Specialite {
     public void setTitre(String titre) {
         this.titre = titre;
     }
+
+    @Override
+    public String toString() {
+        return titre;  // Display the name in the ComboBox
+    }
 }

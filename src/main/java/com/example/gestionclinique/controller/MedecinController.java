@@ -1,9 +1,9 @@
 package com.example.gestionclinique.controller;
 
 import com.example.gestionclinique.model.DAO.MedecinDAO;
-import com.example.gestionclinique.model.DAO.RendezVousDAO;
 import com.example.gestionclinique.model.Medecin;
 import com.example.gestionclinique.model.RendezVous;
+import com.example.gestionclinique.model.Specialite;
 import com.example.gestionclinique.model.util.ConnectionUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +22,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 
 public class MedecinController {
 
@@ -50,7 +49,7 @@ public class MedecinController {
     @FXML
     private TextField cinField;
     @FXML
-    private ComboBox<String> departComboBox;
+    private ComboBox<Specialite> departComboBox;
 
     @FXML
     private TableView<RendezVous> tableRendezVous;
@@ -106,11 +105,29 @@ public class MedecinController {
 
         //  Initialize gender ComboBox
         if (departComboBox != null) {
-            ObservableList<String> genders = FXCollections.observableArrayList("Male", "Female");
-            departComboBox.setItems(genders);
+            // This method should return a list of Specialty objects (id, name)
+            ObservableList<Specialite> specialties = FXCollections.observableArrayList();
+
+            // Query the database and populate the list (you would replace this part with actual DB access code)
+            specialties.addAll(
+                    new Specialite(1, "Cardiology"),
+                    new Specialite(2, "Neurology"),
+                    new Specialite(3, "Orthopedics"),
+                    new Specialite(4, "Pediatrics"),
+                    new Specialite(5, "Dermatology"),
+                    new Specialite(6, "Oncology"),
+                    new Specialite(7, "Gynecology"),
+                    new Specialite(8, "Psychiatry"),
+                    new Specialite(9, "Endocrinology"),
+                    new Specialite(10, "Gastroenterology")
+            );
+
+            departComboBox.setItems(specialties);
         }
 
         }
+
+
     
 
 //    private void navigateToConsultation(RendezVous rendezVous) {
@@ -174,14 +191,20 @@ public class MedecinController {
         // Validate fields
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
-        String cin = cinField.getText();
-        String gsm = gsmField.getText();
         String address = addressField.getText();
-        String gender = departComboBox.getSelectionModel().getSelectedItem();
-        Double weight, height;
+
+        medecinCt.setNom(firstName);
+        medecinCt.setPrenom(lastName);
+        medecinCt.setAdresse(address);
+
+        Specialite selectedSpecialty = departComboBox.getSelectionModel().getSelectedItem();
+        if (selectedSpecialty != null) {
+            int selectedId = selectedSpecialty.getId();
+            System.out.println("Selected Specialty ID: " + selectedId);
+            medecinCt.setSpecialiteId(selectedId);
+        }
 
         LocalDate date = birthDatePicker.getValue();
-
         if (date != null) {
             // Format the date
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -192,17 +215,6 @@ public class MedecinController {
         }
         System.out.println("date : "+ date);
 
-        try {
-            weight = Double.parseDouble(weightField.getText());
-            height = Double.parseDouble(heightField.getText());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Weight and height must be numeric values!");
-        }
-
-        // Update medecin object
-        medecinCt.setNom(firstName);
-        medecinCt.setPrenom(lastName);
-        medecinCt.setAdresse(address);
         medecinCt.setDateNaissance(date.toString());
 
         // Update in database

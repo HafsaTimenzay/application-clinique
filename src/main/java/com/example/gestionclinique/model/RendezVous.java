@@ -33,6 +33,7 @@ public class RendezVous {
     public String getDiagnosis() { return diagnosis.get(); }
     public void setDiagnosis(String diagnosis) { this.diagnosis.set(diagnosis); }
     public StringProperty diagnosisProperty() { return diagnosis; }
+
 }
 
 

@@ -88,7 +88,7 @@ public class MedecinDAO {
     }
 
     public boolean updateMedecin(Medecin medecin) throws SQLException {
-        String sql = "UPDATE Medecin SET nom = ?, prenom = ?, adresse = ?, dateNaissance = ?, specialite_id = ?, compte_id = ? WHERE id = ?";
+        String sql = "UPDATE Medecin SET nom = ?, prenom = ?, adress = ?, dateNaissance = ?, specialite_id = ?, compte_id = ? WHERE id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, medecin.getNom());
             stmt.setString(2, medecin.getPrenom());
