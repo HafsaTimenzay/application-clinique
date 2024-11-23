@@ -1,13 +1,14 @@
 package com.example.gestionclinique.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Consultation {
     private int idConsultation;
     private String symptoms;
     private String diagnosis;
     private String notes;
-    private Date date;
+    private String date;
     private long medecinId;
     private int patientId;
 
@@ -43,11 +44,11 @@ public class Consultation {
         this.notes = notes;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -66,4 +67,6 @@ public class Consultation {
     public void setPatientId(int patientId) {
         this.patientId = patientId;
     }
+
+
 }

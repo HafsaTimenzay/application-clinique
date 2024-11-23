@@ -8,14 +8,10 @@ public class Prescription {
     private String duration;
     private String instructions;
 
-    // Constructeur
-    public Prescription(int id_prescription, int consultation_id, String medication, String dosage, String duration, String instructions) {
-        this.id_prescription = id_prescription;
-        this.consultation_id = consultation_id;
-        this.medication = medication;
-        this.dosage = dosage;
-        this.duration = duration;
-        this.instructions = instructions;
+
+
+    public Prescription() {
+
     }
 
     // Getters et Setters
@@ -65,6 +61,13 @@ public class Prescription {
 
     public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    public int getConsultationId() {
+        return consultation_id;
+    }
+    public void setConsultationId(int consultation_id) {
+        this.consultation_id = consultation_id;
     }
 }
 

@@ -17,6 +17,24 @@ public class DisponibiliteDAO {
         this.connection = connection;
     }
 
+    public void insertAvailability(int doctorId, String day, String startTime, String endTime, int weekID) throws SQLException {
+        if (startTime == null || startTime.isEmpty() || endTime == null || endTime.isEmpty()) {
+            System.out.printf("Incomplete availability for day ID %d. Skipping...%n", day);
+            return;
+        }
+
+        String sql = "INSERT INTO disponibilite (medecin_id, jour, hour_debut, hour_fin, week_id) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, doctorId);
+            preparedStatement.setString(2, day);
+            preparedStatement.setString(3, startTime);
+            preparedStatement.setString(4, endTime);
+            preparedStatement.setInt(5, weekID);
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
     public void createDisponibilite(Disponibilite disponibilite) throws SQLException {
         String sql = "INSERT INTO Disponibilite (medecin_id, jour, hour_debut, hour_fin) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {

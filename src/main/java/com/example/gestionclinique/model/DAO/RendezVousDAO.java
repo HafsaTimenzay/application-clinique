@@ -16,6 +16,8 @@ public class RendezVousDAO {
         this.connection = connection;
     }
 
+
+
     public void insererRendezVous(int patientId, int medecinId, String type) throws SQLException {
         String query = "INSERT INTO rendezvous (type, medecin_id, patient_id) VALUES (?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -23,6 +25,24 @@ public class RendezVousDAO {
             stmt.setInt(2, medecinId);       // Définit l'ID du médecin
             stmt.setInt(3, patientId);       // Définit l'ID du patient
             stmt.executeUpdate();            // Exécute la requête
+        }
+    }
+
+
+    public boolean insertRendezVous(int specialiteId, int doctorId, String date, String time, String details) {
+        String sql = "INSERT INTO rendezvous (specialite_id, doctor_id, date, time, details) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, specialiteId);
+            statement.setInt(2, doctorId);
+            statement.setString(3, date);
+            statement.setString(4, time);
+            statement.setString(5, details);
+
+            int rowsInserted = statement.executeUpdate();
+            return rowsInserted > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 

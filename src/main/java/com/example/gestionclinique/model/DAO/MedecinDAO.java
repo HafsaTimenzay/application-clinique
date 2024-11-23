@@ -2,11 +2,15 @@ package com.example.gestionclinique.model.DAO;
 
 import com.example.gestionclinique.model.Medecin;
 import com.example.gestionclinique.model.Patient;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MedecinDAO {
 
@@ -58,6 +62,46 @@ public class MedecinDAO {
             preparedStatement.setLong(3, medecin.getCompteId());
             return preparedStatement.executeUpdate() > 0;
         }
+    }
+
+    public ObservableList<Medecin> getAllMedecinsByDepartement(int departementId) {
+        String sql = "SELECT id, nom, prenom FROM medecins WHERE departement_id = ?";
+        ObservableList<Medecin> medecins = FXCollections.observableArrayList();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, departementId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Medecin medecin = new Medecin();
+                medecin.setIdMedecin(resultSet.getInt("id"));
+                medecin.setNom(resultSet.getString("nom"));
+                medecin.setPrenom(resultSet.getString("prenom"));
+                medecins.add(medecin);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medecins;
+    }
+
+
+    public ObservableList<Medecin> getAllMedecinsBySpecialite(int specialiteId) {
+        String sql = "SELECT id, nom FROM medecins WHERE specialite_id = ?";
+        ObservableList<Medecin> medecins = FXCollections.observableArrayList();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, specialiteId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nom = resultSet.getString("nom");
+                Medecin medecin = new Medecin();
+                medecin.setIdMedecin(id);
+                medecin.setNom(nom);
+                medecins.add(medecin);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medecins;
     }
 
     public void createMedecin(Medecin medecin) throws SQLException {

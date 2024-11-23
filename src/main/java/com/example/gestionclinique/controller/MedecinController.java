@@ -1,12 +1,14 @@
 package com.example.gestionclinique.controller;
 
+import com.example.gestionclinique.model.*;
+import com.example.gestionclinique.model.DAO.ConsultationDAO;
+import com.example.gestionclinique.model.DAO.DisponibiliteDAO;
 import com.example.gestionclinique.model.DAO.MedecinDAO;
-import com.example.gestionclinique.model.Medecin;
-import com.example.gestionclinique.model.RendezVous;
-import com.example.gestionclinique.model.Specialite;
+import com.example.gestionclinique.model.DAO.PrescriptionDAO;
 import com.example.gestionclinique.model.util.ConnectionUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,56 +26,149 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class MedecinController {
-
-    @FXML
-    private Pane contentPane;
-
-    @FXML
-    private Label pageTitle;
-    
-
-    @FXML
-    private TextField firstNameField;
-    @FXML
-    private TextField lastNameField;
-    @FXML
-    private DatePicker birthDatePicker;
-    @FXML
-    private TextField gsmField;
-    @FXML
-    private TextField addressField;
-    @FXML
-    private TextField weightField;
-    @FXML
-    private TextField heightField;
-    @FXML
-    private TextField cinField;
-    @FXML
-    private ComboBox<Specialite> departComboBox;
-
-    @FXML
-    private TableView<RendezVous> tableRendezVous;
-    @FXML
-    private TableColumn<RendezVous, String> colDate;
-    @FXML
-    private TableColumn<RendezVous, String> colSpecialite;
-    @FXML
-    private TableColumn<RendezVous, String> colDoctor;
-    @FXML
-    private TableColumn<RendezVous, String> colDiagnosis;
-    @FXML
-    private TableColumn<RendezVous, Button> colAction;
-    @FXML
-    private ComboBox<String> specialites;
+    @FXML private CheckBox wednesdayCheckBox;
+    @FXML private TextField wednesdayStartTime;
+    @FXML private TextField wednesdayEndTime;
+    @FXML private CheckBox thursdayCheckBox;
+    @FXML private TextField thursdayStartTime;
+    @FXML private TextField thursdayEndTime;
+    @FXML private CheckBox fridayCheckBox;
+    @FXML private TextField fridayStartTime;
+    @FXML private TextField fridayEndTime;
+    @FXML private CheckBox saturdayCheckBox;
+    @FXML private TextField saturdayStartTime;
+    @FXML private TextField saturdayEndTime;
+    @FXML private ComboBox<String> weekComboBox;
+    @FXML private Button saveButton;
+    @FXML private Pane contentPane;
+    @FXML private Label pageTitle;
+    @FXML private TextField firstNameField;
+    @FXML private TextField lastNameField;
+    @FXML private DatePicker birthDatePicker;
+    @FXML private TextField addressField;
+    @FXML private ComboBox<Specialite> departComboBox;
+    @FXML private TableView<RendezVous> tableRendezVous;
+    @FXML private TableColumn<RendezVous, String> colDate;
+    @FXML private TableColumn<RendezVous, String> colSpecialite;
+    @FXML private TableColumn<RendezVous, String> colDoctor;
+    @FXML private TableColumn<RendezVous, String> colDiagnosis;
+    @FXML private TableColumn<RendezVous, Button> colAction;
+    @FXML private ComboBox<String> specialites;
+    @FXML private TextField symptomsField;
+    @FXML private TextField diagnosisField;
+    @FXML private TextField notesField;
+    @FXML private DatePicker datePicker;
+    @FXML private TextField medicationField;
+    @FXML private TextField dosageField;
+    @FXML private TextField durationField;
+    @FXML private TextField instructionsField;
+    @FXML private CheckBox sundayCheckBox;
+    @FXML private TextField sundayStartTime;
+    @FXML private TextField sundayEndTime;
+    @FXML private CheckBox mondayCheckBox;
+    @FXML private TextField mondayStartTime;
+    @FXML private TextField mondayEndTime;
+    @FXML private CheckBox tuesdayCheckBox;
+    @FXML private TextField tuesdayStartTime;
+    @FXML private TextField tuesdayEndTime;
 
     private Medecin medecinCt; // Global medecin variable
-
     private final MedecinDAO medecinDAO;
+    private final DisponibiliteDAO disponibiliteDAO;
 
     public MedecinController() throws SQLException {
         Connection connection = ConnectionUtil.getConnection();
         this.medecinDAO = new MedecinDAO(connection);
+        this.disponibiliteDAO = new DisponibiliteDAO(connection);
     }
+
+    public void insertConslt(ActionEvent event) {
+        try {
+            // Créez une consultation
+            Consultation consultation = new Consultation();
+            consultation.setPatientId(230); // Vous pouvez récupérer l'ID dynamiquement
+            consultation.setSymptoms(symptomsField.getText());
+            consultation.setDiagnosis(diagnosisField.getText());
+            consultation.setNotes(notesField.getText());
+            consultation.setDate(datePicker.getValue().toString());
+
+            if (ConsultationDAO.insertConsultation(consultation)) {
+                // Créez une prescription associée
+                Prescription prescription = new Prescription();
+                prescription.setConsultationId(consultation.getIdConsultation());
+                prescription.setMedication(medicationField.getText());
+                prescription.setDosage(dosageField.getText());
+                prescription.setDuration(durationField.getText());
+                prescription.setInstructions(instructionsField.getText());
+
+                if (PrescriptionDAO.insertPrescription(prescription)) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION, "Consultation and Prescription saved successfully!");
+                    alert.show();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to save Prescription!");
+                    alert.show();
+                }
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to save Consultation!");
+                alert.show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage());
+            alert.show();
+        }
+    }
+
+
+    @FXML
+    private void saveAvailability() {
+        String selectedWeek = weekComboBox.getValue();
+//        if (selectedWeek == null || selectedWeek.isEmpty()) {
+//            System.out.println("Please select a week.");
+//            return;
+//        }
+
+        try {
+            // ID du médecin connecté (à remplacer dynamiquement)
+            int doctorId = 1;
+            System.out.println("id medecin for jour "+ medecinCt.getIdMedecin());
+            // Dimanche
+            if (sundayCheckBox.isSelected()) {
+                disponibiliteDAO.insertAvailability((int) medecinCt.getIdMedecin(),"Sunday", sundayStartTime.getText(), sundayEndTime.getText(), 1);
+            }
+            // Lundi
+            if (mondayCheckBox.isSelected()) {
+                disponibiliteDAO.insertAvailability((int) medecinCt.getIdMedecin(),"Monday", mondayStartTime.getText(), mondayEndTime.getText(), 1);
+            }
+            // Mardi
+            if (tuesdayCheckBox.isSelected()) {
+                disponibiliteDAO.insertAvailability((int) medecinCt.getIdMedecin(),"Tuesday", tuesdayStartTime.getText(), tuesdayEndTime.getText(), 1);
+            }
+            // Mercredi
+            if (wednesdayCheckBox.isSelected()) {
+                disponibiliteDAO.insertAvailability((int) medecinCt.getIdMedecin(),"Wednesday", wednesdayStartTime.getText(), wednesdayEndTime.getText(), 1);
+            }
+            // Jeudi
+            if (thursdayCheckBox.isSelected()) {
+                disponibiliteDAO.insertAvailability((int) medecinCt.getIdMedecin(),"Thursday", thursdayStartTime.getText(), thursdayEndTime.getText(), 1);
+            }
+            // Vendredi
+            if (fridayCheckBox.isSelected()) {
+                disponibiliteDAO.insertAvailability((int) medecinCt.getIdMedecin(),"Friday", fridayStartTime.getText(), fridayEndTime.getText(), 1);
+            }
+            // Samedi
+            if (saturdayCheckBox.isSelected()) {
+                disponibiliteDAO.insertAvailability((int) medecinCt.getIdMedecin(),"Saturday", saturdayStartTime.getText(), saturdayEndTime.getText(), 1);
+            }
+
+            System.out.println("Doctor availability saved successfully!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error saving doctor availability: " + e.getMessage());
+        }
+    }
+
 
     @FXML
     public void initialize() {
@@ -125,10 +220,32 @@ public class MedecinController {
             departComboBox.setItems(specialties);
         }
 
+        setDefaultTimesOnCheck(sundayCheckBox, sundayStartTime, sundayEndTime);
+        setDefaultTimesOnCheck(mondayCheckBox, mondayStartTime, mondayEndTime);
+        setDefaultTimesOnCheck(tuesdayCheckBox, tuesdayStartTime, tuesdayEndTime);
+        setDefaultTimesOnCheck(wednesdayCheckBox, wednesdayStartTime, wednesdayEndTime);
+        setDefaultTimesOnCheck(thursdayCheckBox, thursdayStartTime, thursdayEndTime);
+        setDefaultTimesOnCheck(fridayCheckBox, fridayStartTime, fridayEndTime);
+        setDefaultTimesOnCheck(saturdayCheckBox, saturdayStartTime, saturdayEndTime);
+
+    }
+
+
+    private void setDefaultTimesOnCheck(CheckBox checkBox, TextField startTime, TextField endTime) {
+        System.out.println(checkBox);
+        if (checkBox != null){
+            checkBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) { // When checkbox is checked
+                    startTime.setText("09:00");
+                    endTime.setText("16:00");
+                } else { // When checkbox is unchecked
+                    startTime.clear();
+                    endTime.clear();
+                }
+            });
         }
 
-
-    
+    }
 
 //    private void navigateToConsultation(RendezVous rendezVous) {
 //        try {
@@ -176,6 +293,7 @@ public class MedecinController {
         firstNameField.setText(medecin.getNom());
         lastNameField.setText(medecin.getPrenom());
         addressField.setText(medecin.getAdresse());
+//        departComboBox.getSelectionModel().select(medecin.get);
 
     }
 

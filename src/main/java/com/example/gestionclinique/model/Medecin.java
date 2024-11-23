@@ -82,5 +82,14 @@ public class Medecin {
         return email;
     }
 
+    public String getFullName() {
+        return "Dr." + nom + " " + prenom;
+    }
+
+    @Override
+    public String toString() {
+        return nom;
+    }
+
 
 }

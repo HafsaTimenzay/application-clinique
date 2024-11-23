@@ -8,60 +8,70 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="518.0" prefWidth="927.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.example.gestionclinique.controller.MedecinController">
+<AnchorPane prefHeight="518.0" prefWidth="927.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionclinique.controller.MedecinController">
     <!-- Section Header -->
-    <Label layoutX="44.0" layoutY="35.0" style="-fx-font-weight: bold;" text="Personal Information">
+    <Label layoutX="76.0" layoutY="55.0" style="-fx-font-weight: bold;" text="Personal Information">
         <font>
             <Font size="18.0" />
         </font>
     </Label>
 
     <!-- First Name -->
-    <Label layoutX="44.0" layoutY="98.0" text="First name">
+    <Label layoutX="71.0" layoutY="147.0" text="First name">
         <font>
             <Font size="17.0" />
         </font>
     </Label>
-    <TextField fx:id="firstNameField" layoutX="144.0" layoutY="98.0" prefHeight="40.0" prefWidth="225.0" promptText="Enter your first name" />
+    <TextField fx:id="firstNameField" layoutX="171.0" layoutY="142.0" prefHeight="40.0" prefWidth="225.0" promptText="Enter your first name" />
 
     <!-- Last Name -->
-    <Label layoutX="407.0" layoutY="100.0" text="Last name">
+    <Label layoutX="431.0" layoutY="147.0" text="Last name">
         <font>
             <Font size="17.0" />
         </font>
     </Label>
-    <TextField fx:id="lastNameField" layoutX="512.0" layoutY="98.0" prefHeight="40.0" prefWidth="225.0" promptText="Enter your last name" />
+    <TextField fx:id="lastNameField" layoutX="531.0" layoutY="142.0" prefHeight="40.0" prefWidth="225.0" promptText="Enter your last name" />
 
     <!-- Date of Birth -->
-    <Label layoutX="338.0" layoutY="179.0" text="Date of Birth">
+    <Label layoutX="71.0" layoutY="212.0" text="Date of Birth">
         <font>
             <Font size="17.0" />
         </font>
     </Label>
-    <DatePicker fx:id="birthDatePicker" layoutX="460.0" layoutY="179.0" prefHeight="36.0" prefWidth="225.0" promptText="Select your birthdate" />
+    <DatePicker fx:id="birthDatePicker" layoutX="181.0" layoutY="207.0" prefHeight="36.0" prefWidth="225.0" promptText="Select your birthdate" />
+
+    <!-- Department -->
+    <Label layoutX="431.0" layoutY="212.0" text="Department">
+        <font>
+            <Font size="17.0" />
+        </font>
+    </Label>
+    <ComboBox fx:id="departComboBox" layoutX="538.0" layoutY="207.0" prefHeight="40.0" prefWidth="225.0" promptText="Select Department" />
+
+    <!-- Years of Experience -->
+    <Label layoutX="71.0" layoutY="276.0" text="Years of Experience">
+        <font>
+            <Font size="17.0" />
+        </font>
+    </Label>
+    <TextField fx:id="yearExper" layoutX="235.0" layoutY="271.0" prefHeight="40.0" prefWidth="175.0" promptText="Years of Experience" />
 
     <!-- GSM -->
-    <Label layoutX="454.0" layoutY="316.0" text="GSM">
+    <Label layoutX="440.0" layoutY="274.0" text="GSM">
         <font>
             <Font size="17.0" />
         </font>
     </Label>
-    <TextField fx:id="gsmField" layoutX="515.0" layoutY="312.0" prefHeight="40.0" prefWidth="280.0" promptText="Enter your GSM" />
-
+    <TextField fx:id="gsmField" layoutX="540.0" layoutY="269.0" prefHeight="40.0" prefWidth="225.0" promptText="Enter your GSM" />
 
     <!-- Address -->
-    <Label layoutX="44.0" layoutY="388.0" text="Address">
+    <Label layoutX="90.0" layoutY="338.0" text="Address">
         <font>
             <Font size="17.0" />
         </font>
     </Label>
-    <TextField fx:id="addressField" layoutX="144.0" layoutY="388.0" prefHeight="40.0" prefWidth="225.0" promptText="Enter address" />
-   <ComboBox fx:id="departComboBox" layoutX="168.0" layoutY="245.0" prefHeight="40.0" prefWidth="232.0" promptText="Select Departement" />
-   <Label layoutX="440.0" layoutY="252.0" text="Year of Experience">
-      <font>
-         <Font size="17.0" />
-      </font>
-   </Label>
-   <TextField fx:id="yearExper" layoutX="597.0" layoutY="245.0" prefHeight="40.0" prefWidth="200.0" promptText="Years of Experience" />
-   <Button fx:id="saveButton" layoutX="760.0" layoutY="440.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" onAction="#updateProfile"/>
+    <TextField fx:id="addressField" layoutX="190.0" layoutY="333.0" prefHeight="40.0" prefWidth="579.0" promptText="Enter address" />
+
+    <!-- Save Button -->
+    <Button fx:id="saveButton" layoutX="722.0" layoutY="437.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" />
 </AnchorPane>

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="518.0" prefWidth="927.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="com.example.gestionclinique.controller.MedecinController">
+<AnchorPane prefHeight="518.0" prefWidth="927.0" style="-fx-background-color: #fff; -fx-background-radius: 15px; -fx-border-radius: 15px;" stylesheets="@../../css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.gestionclinique.controller.MedecinController">
 
     <Label layoutX="55.0" layoutY="37.0" style="-fx-font-weight: bold;" text="Doctor Availability">
         <font>
@@ -16,54 +16,60 @@
         </font>
     </Label>
 
-    <!-- Days and Times -->
+    <!-- Sunday -->
     <Label layoutX="130.0" layoutY="98.0" style="-fx-font-size: 14px;" text="Sunday" />
-    <CheckBox layoutX="83.0" layoutY="92.0" />
-    <TextField layoutX="222.0" layoutY="94.0" prefWidth="120" promptText="Start Time" />
+    <CheckBox fx:id="sundayCheckBox" layoutX="83.0" layoutY="92.0" />
+    <TextField fx:id="sundayStartTime" layoutX="222.0" layoutY="94.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="98.0" style="-fx-font-size: 14px;" text="to" />
-    <TextField layoutX="396.0" layoutY="94.0" prefWidth="120" promptText="End Time" />
+    <TextField fx:id="sundayEndTime" layoutX="396.0" layoutY="94.0" prefWidth="120" promptText="End Time" />
 
+    <!-- Monday -->
     <Label layoutX="130.0" layoutY="150.0" style="-fx-font-size: 14px;" text="Monday" />
-    <CheckBox layoutX="83.0" layoutY="146.0" />
-    <TextField layoutX="222.0" layoutY="147.0" prefWidth="120" promptText="Start Time" />
+    <CheckBox fx:id="mondayCheckBox" layoutX="83.0" layoutY="146.0" />
+    <TextField fx:id="mondayStartTime" layoutX="222.0" layoutY="147.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="150.0" style="-fx-font-size: 14px;" text="to" />
-    <TextField layoutX="396.0" layoutY="147.0" prefWidth="120" promptText="End Time" />
+    <TextField fx:id="mondayEndTime" layoutX="396.0" layoutY="147.0" prefWidth="120" promptText="End Time" />
 
+    <!-- Tuesday -->
     <Label layoutX="130.0" layoutY="203.0" style="-fx-font-size: 14px;" text="Tuesday" />
-    <CheckBox layoutX="83.0" layoutY="198.0" />
-    <TextField layoutX="222.0" layoutY="203.0" prefWidth="120" promptText="Start Time" />
+    <CheckBox fx:id="tuesdayCheckBox" layoutX="83.0" layoutY="198.0" />
+    <TextField fx:id="tuesdayStartTime" layoutX="222.0" layoutY="203.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="206.0" style="-fx-font-size: 14px;" text="to" />
-    <TextField layoutX="396.0" layoutY="203.0" prefWidth="120" promptText="End Time" />
+    <TextField fx:id="tuesdayEndTime" layoutX="396.0" layoutY="203.0" prefWidth="120" promptText="End Time" />
 
+    <!-- Wednesday -->
     <Label layoutX="130.0" layoutY="260.0" style="-fx-font-size: 14px;" text="Wednesday" />
-    <CheckBox layoutX="83.0" layoutY="254.0" />
-    <TextField layoutX="222.0" layoutY="256.0" prefWidth="120" promptText="Start Time" />
+    <CheckBox fx:id="wednesdayCheckBox" layoutX="83.0" layoutY="254.0" />
+    <TextField fx:id="wednesdayStartTime" layoutX="222.0" layoutY="256.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="260.0" style="-fx-font-size: 14px;" text="to" />
-    <TextField layoutX="396.0" layoutY="256.0" prefWidth="120" promptText="End Time" />
+    <TextField fx:id="wednesdayEndTime" layoutX="396.0" layoutY="256.0" prefWidth="120" promptText="End Time" />
 
+    <!-- Thursday -->
     <Label layoutX="130.0" layoutY="314.0" style="-fx-font-size: 14px;" text="Thursday" />
-    <CheckBox layoutX="83.0" layoutY="309.0" />
-    <TextField layoutX="222.0" layoutY="310.0" prefWidth="120" promptText="Start Time" />
+    <CheckBox fx:id="thursdayCheckBox" layoutX="83.0" layoutY="309.0" />
+    <TextField fx:id="thursdayStartTime" layoutX="222.0" layoutY="310.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="314.0" style="-fx-font-size: 14px;" text="to" />
-    <TextField layoutX="396.0" layoutY="310.0" prefWidth="120" promptText="End Time" />
+    <TextField fx:id="thursdayEndTime" layoutX="396.0" layoutY="310.0" prefWidth="120" promptText="End Time" />
 
+    <!-- Friday -->
     <Label layoutX="130.0" layoutY="370.0" style="-fx-font-size: 14px;" text="Friday" />
-    <CheckBox layoutX="83.0" layoutY="364.0" />
-    <TextField layoutX="222.0" layoutY="366.0" prefWidth="120" promptText="Start Time" />
+    <CheckBox fx:id="fridayCheckBox" layoutX="83.0" layoutY="364.0" />
+    <TextField fx:id="fridayStartTime" layoutX="222.0" layoutY="366.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="370.0" style="-fx-font-size: 14px;" text="to" />
-    <TextField layoutX="396.0" layoutY="366.0" prefWidth="120" promptText="End Time" />
+    <TextField fx:id="fridayEndTime" layoutX="396.0" layoutY="366.0" prefWidth="120" promptText="End Time" />
 
+    <!-- Saturday -->
     <Label layoutX="130.0" layoutY="425.0" style="-fx-font-size: 14px;" text="Saturday" />
-    <CheckBox layoutX="83.0" layoutY="419.0" />
-    <TextField layoutX="222.0" layoutY="421.0" prefWidth="120" promptText="Start Time" />
+    <CheckBox fx:id="saturdayCheckBox" layoutX="83.0" layoutY="419.0" />
+    <TextField fx:id="saturdayStartTime" layoutX="222.0" layoutY="421.0" prefWidth="120" promptText="Start Time" />
     <Label layoutX="362.0" layoutY="425.0" style="-fx-font-size: 14px;" text="to" />
-    <TextField layoutX="396.0" layoutY="421.0" prefWidth="120" promptText="End Time" />
+    <TextField fx:id="saturdayEndTime" layoutX="396.0" layoutY="421.0" prefWidth="120" promptText="End Time" />
 
     <!-- Week Selection -->
-    <ComboBox layoutX="615.0" layoutY="143.0" prefHeight="37.0" prefWidth="244.0" promptText="2024/03/01 - 2024/03/08" />
+    <ComboBox fx:id="weekComboBox" layoutX="615.0" layoutY="143.0" prefHeight="37.0" prefWidth="244.0" promptText="2024/03/01 - 2024/03/08" />
     <Label layoutX="614.0" layoutY="95.0" style="-fx-font-size: 14px;" text="Choose the week" />
 
     <!-- Save Button -->
-    <Button fx:id="saveButton" layoutX="770.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" />
+    <Button fx:id="saveButton" layoutX="770.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" onAction="#saveAvailability"/>
 
 </AnchorPane>
