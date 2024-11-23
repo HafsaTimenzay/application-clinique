@@ -7,43 +7,40 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class WeekDAO {
+    private final Connection connection;
 
-    public void addWeek(Week week) {
-        String query = "INSERT INTO Week (startDate, endDate) VALUES (?, ?)";
+    // Constructor to initialize connection
+    public WeekDAO(Connection connection) {
+        this.connection = connection;
+    }
 
-        try (Connection connection = ConnectionUtil.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setDate(1, Date.valueOf(week.getStartDate()));
-            statement.setDate(2, Date.valueOf(week.getEndDate()));
-
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+    // Method to insert a week into the database
+    public boolean insertWeek(Week week) throws SQLException {
+        String query = "INSERT INTO week (week_range) VALUES (?)";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, week.getWeekRange());
+            int rowsAffected = stmt.executeUpdate();
+            return rowsAffected > 0;
         }
     }
 
-    public List<Week> getAllWeeks() {
+    // Method to get all saved weeks from the database
+    public List<Week> getAllWeeks() throws SQLException {
         List<Week> weeks = new ArrayList<>();
-        String query = "SELECT * FROM Week";
-
-        try (Connection connection = ConnectionUtil.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
-
-            while (resultSet.next()) {
-                Week week = new Week(
-                        resultSet.getInt("id_week"),
-                        resultSet.getDate("startDate").toLocalDate(),
-                        resultSet.getDate("endDate").toLocalDate()
-                );
+        String query = "SELECT * FROM week";
+        try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                Week week = new Week(rs.getString("week_range"));
+                week.setId(rs.getInt("id"));
                 weeks.add(week);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-
         return weeks;
     }
 }
+

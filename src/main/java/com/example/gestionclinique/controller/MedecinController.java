@@ -1,10 +1,7 @@
 package com.example.gestionclinique.controller;
 
 import com.example.gestionclinique.model.*;
-import com.example.gestionclinique.model.DAO.ConsultationDAO;
-import com.example.gestionclinique.model.DAO.DisponibiliteDAO;
-import com.example.gestionclinique.model.DAO.MedecinDAO;
-import com.example.gestionclinique.model.DAO.PrescriptionDAO;
+import com.example.gestionclinique.model.DAO.*;
 import com.example.gestionclinique.model.util.ConnectionUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,9 +18,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MedecinController {
     @FXML private CheckBox wednesdayCheckBox;
@@ -72,9 +72,33 @@ public class MedecinController {
     @FXML private TextField tuesdayStartTime;
     @FXML private TextField tuesdayEndTime;
 
+    @FXML private Label currentWeekLabel;
+
     private Medecin medecinCt; // Global medecin variable
-    private final MedecinDAO medecinDAO;
-    private final DisponibiliteDAO disponibiliteDAO;
+    private  MedecinDAO medecinDAO;
+    private  DisponibiliteDAO disponibiliteDAO;
+    private  WeekDAO weekDAO;
+
+    // Date format for displaying weeks
+    private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+    // Constructor - Initialize DAO
+    public MedecinController(Connection connection) {
+        this.weekDAO = new WeekDAO(connection);
+    }
+
+
+
+    // Method to show alerts
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+
 
     public MedecinController() throws SQLException {
         Connection connection = ConnectionUtil.getConnection();
@@ -228,6 +252,26 @@ public class MedecinController {
         setDefaultTimesOnCheck(fridayCheckBox, fridayStartTime, fridayEndTime);
         setDefaultTimesOnCheck(saturdayCheckBox, saturdayStartTime, saturdayEndTime);
 
+
+        String currentWeek = getWeekRange(LocalDate.now());
+        String nextWeek = getWeekRange(LocalDate.now().plusWeeks(1));
+
+        // Set the items in ComboBox: current week and next week
+        if(weekComboBox != null){
+            weekComboBox.getItems().add(currentWeek);
+            weekComboBox.getItems().add(nextWeek);
+
+            // Set the ComboBox's default value
+            weekComboBox.setValue(currentWeek);
+        }
+    }
+
+    private String getWeekRange(LocalDate startOfWeek) {
+        LocalDate startDate = startOfWeek.with(DayOfWeek.MONDAY);
+        LocalDate endDate = startDate.plusDays(6);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return startDate.format(formatter) + " to " + endDate.format(formatter);
     }
 
 
