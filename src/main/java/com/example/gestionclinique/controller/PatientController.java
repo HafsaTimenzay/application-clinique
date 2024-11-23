@@ -237,7 +237,13 @@ public class PatientController {
     }
 
 
+    @FXML
     private void saveRendezVous() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(null);
+        alert.setHeaderText(null);
+        alert.setContentText("Rendez-vous saved");
+        alert.showAndWait();
 
 
 //        specialites.valueProperty().addListener((observable, oldValue, newValue) -> {

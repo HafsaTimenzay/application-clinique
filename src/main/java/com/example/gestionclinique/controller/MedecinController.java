@@ -98,6 +98,14 @@ public class MedecinController {
         alert.showAndWait();
     }
 
+    @FXML
+    private void saveRendezVous() {
+        showAlert(null, "rendez-vous saved");
+    }
+
+
+
+
 
 
     public MedecinController() throws SQLException {
@@ -186,6 +194,7 @@ public class MedecinController {
             }
 
             System.out.println("Doctor availability saved successfully!");
+            showAlert(null, "Doctor availability saved successfully!");
 
         } catch (SQLException e) {
             e.printStackTrace();

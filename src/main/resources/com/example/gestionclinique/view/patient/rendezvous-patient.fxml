@@ -69,5 +69,5 @@
    <ToggleButton layoutX="590.0" layoutY="384.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="02:00 pm" fx:id="2"/>
    <ToggleButton layoutX="695.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="03:00 pm" fx:id="3"/>
    <ToggleButton layoutX="801.0" layoutY="383.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="80.0" text="04:00 pm" fx:id="4"/>
-   <Button fx:id="saveButton" layoutX="770.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" />
+   <Button fx:id="saveButton" layoutX="770.0" layoutY="450.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="88.0" styleClass="Btn" text="Save" onAction="#saveRendezVous"/>
 </AnchorPane>
